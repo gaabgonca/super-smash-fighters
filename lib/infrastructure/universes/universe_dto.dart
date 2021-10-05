@@ -7,7 +7,7 @@ import 'package:super_smash_fighters/domain/core/universe.dart';
 class Universe {
   int? id;
 
-  String? objectId;
+  String? objectID;
   @Index(indexType: IndexType.words)
   String? name;
 
@@ -15,7 +15,7 @@ class Universe {
 
   Universe({
     this.id,
-    this.objectId,
+    this.objectID,
     this.name,
     this.description,
   });
@@ -23,7 +23,7 @@ class Universe {
   factory Universe.fromDomain(UniverseDomain universe) {
     return Universe(
       id: universe.id,
-      objectId: universe.objectId,
+      objectID: universe.objectId,
       name: universe.name,
       description: universe.description,
     );
@@ -32,15 +32,15 @@ class Universe {
   UniverseDomain toDomain() {
     return UniverseDomain(
       id: this.id ?? 0,
-      objectId: this.objectId!,
+      objectId: this.objectID ?? '',
       name: this.name!,
-      description: this.description!,
+      description: this.description ?? '',
     );
   }
 
   factory Universe.fromJson(Map<String, dynamic> json) => Universe(
-        id: json['id'],
-        objectId: json['objectId'],
-        name: json['name'],
-      );
+      id: json['id'],
+      objectID: json['objectID'],
+      name: json['name'],
+      description: json['description']);
 }

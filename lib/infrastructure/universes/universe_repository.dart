@@ -18,26 +18,6 @@ class UniverseRepository implements IUniverseRepository {
   final String url = 'https://593cdf8fb56f410011e7e7a9.mockapi.io/universes';
 
   UniverseRepository(this.isar, this.httpClient);
-  @override
-  Future<Either<UniverseFailure, UniverseDomain>> create(
-      UniverseDomain universe) {
-    // TODO: implement create
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<UniverseFailure, UniverseDomain>> delete(
-      UniverseDomain universe) {
-    // TODO: implement delete
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<UniverseFailure, UniverseDomain>> update(
-      UniverseDomain universe) {
-    // TODO: implement update
-    throw UnimplementedError();
-  }
 
   @override
   Stream<Either<UniverseFailure, List<UniverseDomain>>> watchAll() async* {
@@ -45,24 +25,41 @@ class UniverseRepository implements IUniverseRepository {
     var cachedUniverses = await universesCollection.where().findAll();
     if (cachedUniverses.isEmpty) {
       try {
-        final Response response = await httpClient.get(Uri.parse(url));
-        final String rawString = response.body;
-        final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes))
-            as List<Map<String, dynamic>>;
-        final universes = decodedResponse
-            .map((universeData) => Universe.fromJson(universeData))
-            .toList();
+        final universes = await getUniverses();
         await isar.writeTxn((_) async {
           await universesCollection.putAll(universes);
         });
-        List cachedUniverses = await universesCollection.where().findAll();
-        final universesDomain = cachedUniverses
-            .map((universeDto) => universeDto.toDomain() as UniverseDomain)
-            .toList();
-        yield right(universesDomain);
       } catch (e) {
         yield left(UniverseFailure.unexpectedUniverse());
       }
     }
+    cachedUniverses = await universesCollection.where().findAll();
+    final universesDomain = cachedUniverses
+        .map((universeDto) => universeDto.toDomain() as UniverseDomain)
+        .toList();
+    yield right(universesDomain);
+  }
+
+  @override
+  Future<Either<UniverseFailure, Unit>> deleteAll() async {
+    final universesCollection = isar.getCollection('Universe');
+    try {
+      await isar.writeTxn((_) async {
+        await universesCollection.where().deleteAll();
+      });
+      return (right(unit));
+    } catch (e) {
+      return left(UniverseFailure.deleteFailure());
+    }
+  }
+
+  Future<List<Universe>> getUniverses() async {
+    final Response response = await httpClient.get(Uri.parse(url));
+    final decodedResponse =
+        jsonDecode(utf8.decode(response.bodyBytes)) as List<dynamic>;
+    final universes = decodedResponse
+        .map((universeData) => Universe.fromJson(universeData))
+        .toList();
+    return universes;
   }
 }

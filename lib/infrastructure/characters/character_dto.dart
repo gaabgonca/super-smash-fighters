@@ -6,7 +6,7 @@ import 'package:super_smash_fighters/domain/core/character.dart';
 class Character {
   int? id;
 
-  String? objectId;
+  String? objectID;
   @Index(indexType: IndexType.words)
   String? name;
 
@@ -20,7 +20,7 @@ class Character {
 
   Character(
       {this.id,
-      this.objectId,
+      this.objectID,
       this.name,
       this.universe,
       this.price,
@@ -33,7 +33,7 @@ class Character {
   factory Character.fromDomain(CharacterDomain character) {
     return Character(
         id: character.id,
-        objectId: character.objectId,
+        objectID: character.objectId,
         name: character.name,
         universe: character.universe,
         price: character.price,
@@ -47,7 +47,7 @@ class Character {
   CharacterDomain toDomain() {
     return CharacterDomain(
         id: this.id ?? 0,
-        objectId: this.objectId!,
+        objectId: this.objectID!,
         name: this.name!,
         universe: this.universe!,
         price: this.price!,
@@ -60,7 +60,7 @@ class Character {
 
   factory Character.fromJson(Map<String, dynamic> json) => Character(
         id: json['id'],
-        objectId: json['objectId'],
+        objectID: json['objectID'],
         name: json['name'],
         universe: json['universe'],
         price: json['price'],

@@ -5,6 +5,6 @@ import 'package:super_smash_fighters/injection.config.dart';
 final GetIt getIt = GetIt.instance;
 
 @injectableInit
-void configureInjection(String env) {
-  $initGetIt(getIt, environment: env);
+void configureInjection(String env) async {
+  await $initGetIt(getIt, environment: env);
 }

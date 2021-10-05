@@ -103,7 +103,7 @@ class _UniverseAdapter extends TypeAdapter<Universe> {
     var dynamicSize = 0;
     final value0 = object.id;
     final _id = value0;
-    final value1 = object.objectId;
+    final value1 = object.objectID;
     Uint8List? _objectId;
     if (value1 != null) {
       _objectId = _utf8Encoder.convert(value1);
@@ -151,7 +151,7 @@ class _UniverseAdapter extends TypeAdapter<Universe> {
       BinaryReader reader, List<int> offsets) {
     final object = Universe();
     object.id = reader.readLongOrNull(offsets[0]);
-    object.objectId = reader.readStringOrNull(offsets[1]);
+    object.objectID = reader.readStringOrNull(offsets[1]);
     object.name = reader.readStringOrNull(offsets[2]);
     object.description = reader.readStringOrNull(offsets[3]);
     return object;
@@ -182,7 +182,7 @@ class _CharacterAdapter extends TypeAdapter<Character> {
     var dynamicSize = 0;
     final value0 = object.id;
     final _id = value0;
-    final value1 = object.objectId;
+    final value1 = object.objectID;
     Uint8List? _objectId;
     if (value1 != null) {
       _objectId = _utf8Encoder.convert(value1);
@@ -264,7 +264,7 @@ class _CharacterAdapter extends TypeAdapter<Character> {
       BinaryReader reader, List<int> offsets) {
     final object = Character();
     object.id = reader.readLongOrNull(offsets[0]);
-    object.objectId = reader.readStringOrNull(offsets[1]);
+    object.objectID = reader.readStringOrNull(offsets[1]);
     object.name = reader.readStringOrNull(offsets[2]);
     object.universe = reader.readStringOrNull(offsets[3]);
     object.price = reader.readStringOrNull(offsets[4]);

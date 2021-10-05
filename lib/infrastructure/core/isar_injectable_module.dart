@@ -7,6 +7,7 @@ import 'package:super_smash_fighters/isar.g.dart';
 
 @module
 abstract class IsarInjectableModule {
+  @preResolve
   @lazySingleton
   Future<Isar> get isar => openIsar();
   @lazySingleton

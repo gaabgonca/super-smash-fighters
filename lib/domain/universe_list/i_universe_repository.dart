@@ -7,10 +7,5 @@ import 'package:super_smash_fighters/domain/universe_list/universe_failure.dart'
 
 abstract class IUniverseRepository {
   Stream<Either<UniverseFailure, List<UniverseDomain>>> watchAll();
-  Future<Either<UniverseFailure, UniverseDomain>> create(
-      UniverseDomain universe);
-  Future<Either<UniverseFailure, UniverseDomain>> update(
-      UniverseDomain universe);
-  Future<Either<UniverseFailure, UniverseDomain>> delete(
-      UniverseDomain universe);
+  Future<Either<UniverseFailure, Unit>> deleteAll();
 }
