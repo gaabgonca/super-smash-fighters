@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_smash_fighters/presentation/onboarding/first_onboarding_page.dart';
 import 'package:super_smash_fighters/presentation/splash/splash_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashPage(),
+      home: FirstOnboardingPage(),
     );
   }
 }
