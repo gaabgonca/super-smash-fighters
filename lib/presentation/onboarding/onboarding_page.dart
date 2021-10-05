@@ -141,7 +141,7 @@ Widget _mainButton(
         child: Text(buttonText,
             style: TextStyle(fontSize: 20, color: Colors.white)),
       ),
-      onPressed: buttonOnPressed(),
+      onPressed: () => buttonOnPressed(context),
     ),
   );
 }
