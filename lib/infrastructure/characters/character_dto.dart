@@ -16,7 +16,7 @@ class Character {
   int? rate;
   String? downloads;
   String? description;
-  String? imageUrl;
+  String? imageURL;
 
   Character(
       {this.id,
@@ -28,7 +28,7 @@ class Character {
       this.rate,
       this.downloads,
       this.description,
-      this.imageUrl});
+      this.imageURL});
 
   factory Character.fromDomain(CharacterDomain character) {
     return Character(
@@ -41,7 +41,7 @@ class Character {
         rate: character.rate,
         downloads: character.downloads,
         description: character.description,
-        imageUrl: character.imageUrl);
+        imageURL: character.imageURL);
   }
 
   CharacterDomain toDomain() {
@@ -55,18 +55,18 @@ class Character {
         rate: this.rate!,
         downloads: this.downloads!,
         description: this.description!,
-        imageUrl: this.imageUrl!);
+        imageURL: this.imageURL!);
   }
 
   factory Character.fromJson(Map<String, dynamic> json) => Character(
-        id: json['id'],
-        objectID: json['objectID'],
-        name: json['name'],
-        universe: json['universe'],
-        price: json['price'],
-        popular: json['popular'],
-        rate: json['rate'],
-        downloads: json['downloads'],
-        imageUrl: json['imageUrl'],
-      );
+      id: json['id'],
+      objectID: json['objectID'],
+      name: json['name'],
+      universe: json['universe'],
+      price: json['price'],
+      popular: json['popular'],
+      rate: json['rate'],
+      downloads: json['downloads'],
+      imageURL: json['imageURL'],
+      description: json['description']);
 }

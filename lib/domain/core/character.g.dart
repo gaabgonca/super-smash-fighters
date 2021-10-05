@@ -16,7 +16,7 @@ _$_Character _$$_CharacterFromJson(Map<String, dynamic> json) => _$_Character(
       rate: json['rate'] as int,
       downloads: json['downloads'] as String,
       description: json['description'] as String,
-      imageUrl: json['imageUrl'] as String,
+      imageURL: json['imageURL'] as String,
     );
 
 Map<String, dynamic> _$$_CharacterToJson(_$_Character instance) =>
@@ -30,5 +30,5 @@ Map<String, dynamic> _$$_CharacterToJson(_$_Character instance) =>
       'rate': instance.rate,
       'downloads': instance.downloads,
       'description': instance.description,
-      'imageUrl': instance.imageUrl,
+      'imageURL': instance.imageURL,
     };

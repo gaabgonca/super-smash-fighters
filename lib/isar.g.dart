@@ -222,7 +222,7 @@ class _CharacterAdapter extends TypeAdapter<Character> {
       _description = _utf8Encoder.convert(value8);
     }
     dynamicSize += _description?.length ?? 0;
-    final value9 = object.imageUrl;
+    final value9 = object.imageURL;
     Uint8List? _imageUrl;
     if (value9 != null) {
       _imageUrl = _utf8Encoder.convert(value9);
@@ -272,7 +272,7 @@ class _CharacterAdapter extends TypeAdapter<Character> {
     object.rate = reader.readLongOrNull(offsets[6]);
     object.downloads = reader.readStringOrNull(offsets[7]);
     object.description = reader.readStringOrNull(offsets[8]);
-    object.imageUrl = reader.readStringOrNull(offsets[9]);
+    object.imageURL = reader.readStringOrNull(offsets[9]);
     return object;
   }
 

@@ -31,7 +31,7 @@ class _$CharacterDomainTearOff {
       required int rate,
       required String downloads,
       required String description,
-      required String imageUrl}) {
+      required String imageURL}) {
     return _Character(
       id: id,
       objectId: objectId,
@@ -42,7 +42,7 @@ class _$CharacterDomainTearOff {
       rate: rate,
       downloads: downloads,
       description: description,
-      imageUrl: imageUrl,
+      imageURL: imageURL,
     );
   }
 
@@ -65,7 +65,7 @@ mixin _$CharacterDomain {
   int get rate => throw _privateConstructorUsedError;
   String get downloads => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  String get imageUrl => throw _privateConstructorUsedError;
+  String get imageURL => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -88,7 +88,7 @@ abstract class $CharacterDomainCopyWith<$Res> {
       int rate,
       String downloads,
       String description,
-      String imageUrl});
+      String imageURL});
 }
 
 /// @nodoc
@@ -111,7 +111,7 @@ class _$CharacterDomainCopyWithImpl<$Res>
     Object? rate = freezed,
     Object? downloads = freezed,
     Object? description = freezed,
-    Object? imageUrl = freezed,
+    Object? imageURL = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -150,9 +150,9 @@ class _$CharacterDomainCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: imageUrl == freezed
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
+      imageURL: imageURL == freezed
+          ? _value.imageURL
+          : imageURL // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -175,7 +175,7 @@ abstract class _$CharacterCopyWith<$Res>
       int rate,
       String downloads,
       String description,
-      String imageUrl});
+      String imageURL});
 }
 
 /// @nodoc
@@ -198,7 +198,7 @@ class __$CharacterCopyWithImpl<$Res> extends _$CharacterDomainCopyWithImpl<$Res>
     Object? rate = freezed,
     Object? downloads = freezed,
     Object? description = freezed,
-    Object? imageUrl = freezed,
+    Object? imageURL = freezed,
   }) {
     return _then(_Character(
       id: id == freezed
@@ -237,9 +237,9 @@ class __$CharacterCopyWithImpl<$Res> extends _$CharacterDomainCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: imageUrl == freezed
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
+      imageURL: imageURL == freezed
+          ? _value.imageURL
+          : imageURL // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -258,7 +258,7 @@ class _$_Character extends _Character {
       required this.rate,
       required this.downloads,
       required this.description,
-      required this.imageUrl})
+      required this.imageURL})
       : super._();
 
   factory _$_Character.fromJson(Map<String, dynamic> json) =>
@@ -283,11 +283,11 @@ class _$_Character extends _Character {
   @override
   final String description;
   @override
-  final String imageUrl;
+  final String imageURL;
 
   @override
   String toString() {
-    return 'CharacterDomain(id: $id, objectId: $objectId, name: $name, universe: $universe, price: $price, popular: $popular, rate: $rate, downloads: $downloads, description: $description, imageUrl: $imageUrl)';
+    return 'CharacterDomain(id: $id, objectId: $objectId, name: $name, universe: $universe, price: $price, popular: $popular, rate: $rate, downloads: $downloads, description: $description, imageURL: $imageURL)';
   }
 
   @override
@@ -317,9 +317,9 @@ class _$_Character extends _Character {
             (identical(other.description, description) ||
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
-            (identical(other.imageUrl, imageUrl) ||
+            (identical(other.imageURL, imageURL) ||
                 const DeepCollectionEquality()
-                    .equals(other.imageUrl, imageUrl)));
+                    .equals(other.imageURL, imageURL)));
   }
 
   @override
@@ -334,7 +334,7 @@ class _$_Character extends _Character {
       const DeepCollectionEquality().hash(rate) ^
       const DeepCollectionEquality().hash(downloads) ^
       const DeepCollectionEquality().hash(description) ^
-      const DeepCollectionEquality().hash(imageUrl);
+      const DeepCollectionEquality().hash(imageURL);
 
   @JsonKey(ignore: true)
   @override
@@ -358,7 +358,7 @@ abstract class _Character extends CharacterDomain {
       required int rate,
       required String downloads,
       required String description,
-      required String imageUrl}) = _$_Character;
+      required String imageURL}) = _$_Character;
   const _Character._() : super._();
 
   factory _Character.fromJson(Map<String, dynamic> json) =
@@ -383,7 +383,7 @@ abstract class _Character extends CharacterDomain {
   @override
   String get description => throw _privateConstructorUsedError;
   @override
-  String get imageUrl => throw _privateConstructorUsedError;
+  String get imageURL => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CharacterCopyWith<_Character> get copyWith =>

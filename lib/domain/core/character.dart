@@ -17,7 +17,7 @@ abstract class CharacterDomain implements _$CharacterDomain {
       required int rate,
       required String downloads,
       required String description,
-      required String imageUrl}) = _Character;
+      required String imageURL}) = _Character;
 
   factory CharacterDomain.empty() => CharacterDomain(
       id: 0,
@@ -29,7 +29,7 @@ abstract class CharacterDomain implements _$CharacterDomain {
       rate: 1,
       downloads: '',
       description: '',
-      imageUrl: '');
+      imageURL: '');
 
   factory CharacterDomain.fromJson(Map<String, dynamic> json) =>
       _$CharacterDomainFromJson(json);

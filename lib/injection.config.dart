@@ -10,9 +10,11 @@ import 'package:http/http.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:isar/isar.dart' as _i6;
 
-import 'domain/universe_list/i_universe_repository.dart' as _i7;
-import 'infrastructure/core/isar_injectable_module.dart' as _i9;
-import 'infrastructure/universes/universe_repository.dart' as _i8;
+import 'domain/character_list/i_character_repository.dart' as _i7;
+import 'domain/universe_list/i_universe_repository.dart' as _i9;
+import 'infrastructure/characters/character_repository.dart' as _i8;
+import 'infrastructure/core/isar_injectable_module.dart' as _i11;
+import 'infrastructure/universes/universe_repository.dart' as _i10;
 import 'presentation/character_list/character_list_page.dart'
     as _i3; // ignore_for_file: unnecessary_lambdas
 
@@ -27,9 +29,11 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i5.Client>(() => isarInjectableModule.httpClient);
   await gh.lazySingletonAsync<_i6.Isar>(() => isarInjectableModule.isar,
       preResolve: true);
-  gh.lazySingleton<_i7.IUniverseRepository>(
-      () => _i8.UniverseRepository(get<_i6.Isar>(), get<_i5.Client>()));
+  gh.lazySingleton<_i7.ICharacterRepository>(
+      () => _i8.CharacterRepository(get<_i5.Client>(), get<_i6.Isar>()));
+  gh.lazySingleton<_i9.IUniverseRepository>(
+      () => _i10.UniverseRepository(get<_i6.Isar>(), get<_i5.Client>()));
   return get;
 }
 
-class _$IsarInjectableModule extends _i9.IsarInjectableModule {}
+class _$IsarInjectableModule extends _i11.IsarInjectableModule {}

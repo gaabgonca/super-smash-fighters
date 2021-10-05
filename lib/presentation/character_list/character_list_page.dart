@@ -1,6 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:super_smash_fighters/domain/character_list/character_failure.dart';
+import 'package:super_smash_fighters/domain/character_list/i_character_repository.dart';
+import 'package:super_smash_fighters/domain/core/character.dart';
 import 'package:super_smash_fighters/domain/core/universe.dart';
 import 'package:super_smash_fighters/domain/universe_list/i_universe_repository.dart';
 import 'package:super_smash_fighters/domain/universe_list/universe_failure.dart';
@@ -17,13 +20,12 @@ class CharacterListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder(
-        stream: getIt<IUniverseRepository>().watchAll(),
+        stream: getIt<ICharacterRepository>().watchAll(),
         builder: (BuildContext context,
-            AsyncSnapshot<Either<UniverseFailure, List<UniverseDomain>>>
-                snapshot) {
+            AsyncSnapshot<Either<CharacterFailure, dynamic>> snapshot) {
           if (snapshot.hasData) {
-            var universes = snapshot.data;
-            print(universes);
+            var characters = snapshot.data;
+            print(characters);
             return Center(
               child: Text('Data loaded'),
             );

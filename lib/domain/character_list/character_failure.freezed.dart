@@ -20,6 +20,10 @@ class _$CharacterFailureTearOff {
   _Unexpected unexpected() {
     return const _Unexpected();
   }
+
+  _DeleteFailureCharacter deleteFailure() {
+    return const _DeleteFailureCharacter();
+  }
 }
 
 /// @nodoc
@@ -30,32 +34,38 @@ mixin _$CharacterFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unexpected,
+    required TResult Function() deleteFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? unexpected,
+    TResult Function()? deleteFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unexpected,
+    TResult Function()? deleteFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_DeleteFailureCharacter value) deleteFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DeleteFailureCharacter value)? deleteFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DeleteFailureCharacter value)? deleteFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,6 +129,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unexpected,
+    required TResult Function() deleteFailure,
   }) {
     return unexpected();
   }
@@ -127,6 +138,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? unexpected,
+    TResult Function()? deleteFailure,
   }) {
     return unexpected?.call();
   }
@@ -135,6 +147,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unexpected,
+    TResult Function()? deleteFailure,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -147,6 +160,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_DeleteFailureCharacter value) deleteFailure,
   }) {
     return unexpected(this);
   }
@@ -155,6 +169,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DeleteFailureCharacter value)? deleteFailure,
   }) {
     return unexpected?.call(this);
   }
@@ -163,6 +178,7 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DeleteFailureCharacter value)? deleteFailure,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -174,4 +190,108 @@ class _$_Unexpected implements _Unexpected {
 
 abstract class _Unexpected implements CharacterFailure {
   const factory _Unexpected() = _$_Unexpected;
+}
+
+/// @nodoc
+abstract class _$DeleteFailureCharacterCopyWith<$Res> {
+  factory _$DeleteFailureCharacterCopyWith(_DeleteFailureCharacter value,
+          $Res Function(_DeleteFailureCharacter) then) =
+      __$DeleteFailureCharacterCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$DeleteFailureCharacterCopyWithImpl<$Res>
+    extends _$CharacterFailureCopyWithImpl<$Res>
+    implements _$DeleteFailureCharacterCopyWith<$Res> {
+  __$DeleteFailureCharacterCopyWithImpl(_DeleteFailureCharacter _value,
+      $Res Function(_DeleteFailureCharacter) _then)
+      : super(_value, (v) => _then(v as _DeleteFailureCharacter));
+
+  @override
+  _DeleteFailureCharacter get _value => super._value as _DeleteFailureCharacter;
+}
+
+/// @nodoc
+
+class _$_DeleteFailureCharacter implements _DeleteFailureCharacter {
+  const _$_DeleteFailureCharacter();
+
+  @override
+  String toString() {
+    return 'CharacterFailure.deleteFailure()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _DeleteFailureCharacter);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unexpected,
+    required TResult Function() deleteFailure,
+  }) {
+    return deleteFailure();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? unexpected,
+    TResult Function()? deleteFailure,
+  }) {
+    return deleteFailure?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unexpected,
+    TResult Function()? deleteFailure,
+    required TResult orElse(),
+  }) {
+    if (deleteFailure != null) {
+      return deleteFailure();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_DeleteFailureCharacter value) deleteFailure,
+  }) {
+    return deleteFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DeleteFailureCharacter value)? deleteFailure,
+  }) {
+    return deleteFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_DeleteFailureCharacter value)? deleteFailure,
+    required TResult orElse(),
+  }) {
+    if (deleteFailure != null) {
+      return deleteFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteFailureCharacter implements CharacterFailure {
+  const factory _DeleteFailureCharacter() = _$_DeleteFailureCharacter;
 }
