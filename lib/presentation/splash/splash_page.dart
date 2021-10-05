@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:super_smash_fighters/presentation/core/blend_mask.dart';
 import 'package:super_smash_fighters/presentation/core/colors.dart';
+import 'package:super_smash_fighters/presentation/core/build_context_x.dart';
+
+//TODO: fix mediaqueries
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
