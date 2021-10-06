@@ -6,6 +6,7 @@ import 'package:super_smash_fighters/presentation/core/build_context_x.dart';
 
 class UniversesList extends StatelessWidget {
   final List<UniverseDomain> universes;
+  final int selectedIndex = 0;
   const UniversesList({Key? key, required this.universes}) : super(key: key);
 
   @override
@@ -24,6 +25,10 @@ class UniversesList extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 5),
                   child: UniverseButton(
                     universe: universe,
+                    selected: selectedIndex == index,
+                    onPressed: () {
+                      print(index);
+                    },
                   ));
             }),
       ),
@@ -33,7 +38,14 @@ class UniversesList extends StatelessWidget {
 
 class UniverseButton extends StatelessWidget {
   final UniverseDomain universe;
-  const UniverseButton({Key? key, required this.universe}) : super(key: key);
+  final bool selected;
+  final Function onPressed;
+  const UniverseButton(
+      {Key? key,
+      required this.universe,
+      required this.selected,
+      required this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,17 +53,16 @@ class UniverseButton extends StatelessWidget {
       child: Text(
         universe.name,
         style: TextStyle(
-          color: kMainFuchsia,
+          color: selected ? Colors.white : kMainFuchsia,
           fontSize: 15,
         ),
         textAlign: TextAlign.center,
       ),
-      onPressed: () {
-        print(universe.id);
-      },
+      onPressed: () => this.onPressed(),
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(0),
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        backgroundColor: MaterialStateProperty.all<Color>(
+            selected ? kMainFuchsia : Colors.white),
         fixedSize: MaterialStateProperty.all<Size>(Size(125, 39)),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
