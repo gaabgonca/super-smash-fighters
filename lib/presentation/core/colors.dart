@@ -15,3 +15,7 @@ const Color kDarkGray = Color(0xFF222222);
 const Color kOverlayClearBlue = Color.fromRGBO(52, 92, 197, 0.001);
 
 const Color kOverlayDarkBlue = Color(0xFF142246);
+
+const Color kPictureBorderGray = Color(0xFFEAEAEA);
+
+const Color kPictureBackgroundColor = Color(0xFFFBFBFB);

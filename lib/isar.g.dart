@@ -18,7 +18,7 @@ import 'package:flutter/widgets.dart';
 const _utf8Encoder = Utf8Encoder();
 
 final _schema =
-    '[{"name":"Universe","idProperty":"id","properties":[{"name":"id","type":3},{"name":"objectId","type":5},{"name":"name","type":5},{"name":"description","type":5}],"indexes":[{"unique":false,"replace":false,"properties":[{"name":"name","indexType":2,"caseSensitive":true}]}],"links":[]},{"name":"Character","idProperty":"id","properties":[{"name":"id","type":3},{"name":"objectId","type":5},{"name":"name","type":5},{"name":"universe","type":5},{"name":"price","type":5},{"name":"popular","type":0},{"name":"rate","type":3},{"name":"downloads","type":5},{"name":"description","type":5},{"name":"imageUrl","type":5}],"indexes":[{"unique":false,"replace":false,"properties":[{"name":"name","indexType":2,"caseSensitive":true}]}],"links":[]}]';
+    '[{"name":"Universe","idProperty":"id","properties":[{"name":"id","type":3},{"name":"objectID","type":5},{"name":"name","type":5},{"name":"description","type":5}],"indexes":[{"unique":false,"replace":false,"properties":[{"name":"name","indexType":2,"caseSensitive":true}]}],"links":[]},{"name":"Character","idProperty":"id","properties":[{"name":"id","type":3},{"name":"objectID","type":5},{"name":"name","type":5},{"name":"universe","type":5},{"name":"price","type":5},{"name":"popular","type":0},{"name":"rate","type":3},{"name":"downloads","type":5},{"name":"description","type":5},{"name":"imageURL","type":5}],"indexes":[{"unique":false,"replace":false,"properties":[{"name":"name","indexType":2,"caseSensitive":true}]}],"links":[]}]';
 
 Future<Isar> openIsar(
     {String name = 'isar',
@@ -45,7 +45,7 @@ Future<Isar> openIsar(
           adapter: _UniverseAdapter(),
           ptr: collectionPtrPtr.value,
           propertyOffsets: propertyOffsets.sublist(0, 4),
-          propertyIds: {'id': 0, 'objectId': 1, 'name': 2, 'description': 3},
+          propertyIds: {'id': 0, 'objectID': 1, 'name': 2, 'description': 3},
           indexIds: {'name': 0},
           linkIds: {},
           backlinkIds: {},
@@ -62,7 +62,7 @@ Future<Isar> openIsar(
           propertyOffsets: propertyOffsets.sublist(0, 10),
           propertyIds: {
             'id': 0,
-            'objectId': 1,
+            'objectID': 1,
             'name': 2,
             'universe': 3,
             'price': 4,
@@ -70,7 +70,7 @@ Future<Isar> openIsar(
             'rate': 6,
             'downloads': 7,
             'description': 8,
-            'imageUrl': 9
+            'imageURL': 9
           },
           indexIds: {'name': 0},
           linkIds: {},
@@ -104,11 +104,11 @@ class _UniverseAdapter extends TypeAdapter<Universe> {
     final value0 = object.id;
     final _id = value0;
     final value1 = object.objectID;
-    Uint8List? _objectId;
+    Uint8List? _objectID;
     if (value1 != null) {
-      _objectId = _utf8Encoder.convert(value1);
+      _objectID = _utf8Encoder.convert(value1);
     }
-    dynamicSize += _objectId?.length ?? 0;
+    dynamicSize += _objectID?.length ?? 0;
     final value2 = object.name;
     Uint8List? _name;
     if (value2 != null) {
@@ -140,7 +140,7 @@ class _UniverseAdapter extends TypeAdapter<Universe> {
     final buffer = rawObj.buffer.asTypedList(size);
     final writer = BinaryWriter(buffer, 34);
     writer.writeLong(offsets[0], _id);
-    writer.writeBytes(offsets[1], _objectId);
+    writer.writeBytes(offsets[1], _objectID);
     writer.writeBytes(offsets[2], _name);
     writer.writeBytes(offsets[3], _description);
     return bufferSize;
@@ -183,11 +183,11 @@ class _CharacterAdapter extends TypeAdapter<Character> {
     final value0 = object.id;
     final _id = value0;
     final value1 = object.objectID;
-    Uint8List? _objectId;
+    Uint8List? _objectID;
     if (value1 != null) {
-      _objectId = _utf8Encoder.convert(value1);
+      _objectID = _utf8Encoder.convert(value1);
     }
-    dynamicSize += _objectId?.length ?? 0;
+    dynamicSize += _objectID?.length ?? 0;
     final value2 = object.name;
     Uint8List? _name;
     if (value2 != null) {
@@ -223,11 +223,11 @@ class _CharacterAdapter extends TypeAdapter<Character> {
     }
     dynamicSize += _description?.length ?? 0;
     final value9 = object.imageURL;
-    Uint8List? _imageUrl;
+    Uint8List? _imageURL;
     if (value9 != null) {
-      _imageUrl = _utf8Encoder.convert(value9);
+      _imageURL = _utf8Encoder.convert(value9);
     }
-    dynamicSize += _imageUrl?.length ?? 0;
+    dynamicSize += _imageURL?.length ?? 0;
     final size = dynamicSize + 75;
 
     late int bufferSize;
@@ -247,7 +247,7 @@ class _CharacterAdapter extends TypeAdapter<Character> {
     final buffer = rawObj.buffer.asTypedList(size);
     final writer = BinaryWriter(buffer, 75);
     writer.writeLong(offsets[0], _id);
-    writer.writeBytes(offsets[1], _objectId);
+    writer.writeBytes(offsets[1], _objectID);
     writer.writeBytes(offsets[2], _name);
     writer.writeBytes(offsets[3], _universe);
     writer.writeBytes(offsets[4], _price);
@@ -255,7 +255,7 @@ class _CharacterAdapter extends TypeAdapter<Character> {
     writer.writeLong(offsets[6], _rate);
     writer.writeBytes(offsets[7], _downloads);
     writer.writeBytes(offsets[8], _description);
-    writer.writeBytes(offsets[9], _imageUrl);
+    writer.writeBytes(offsets[9], _imageURL);
     return bufferSize;
   }
 
@@ -417,66 +417,66 @@ extension UniverseQueryFilter on QueryBuilder<Universe, QFilterCondition> {
     ));
   }
 
-  QueryBuilder<Universe, QAfterFilterCondition> objectIdIsNull() {
+  QueryBuilder<Universe, QAfterFilterCondition> objectIDIsNull() {
     return addFilterCondition(FilterCondition(
       type: ConditionType.Eq,
-      property: 'objectId',
+      property: 'objectID',
       value: null,
     ));
   }
 
-  QueryBuilder<Universe, QAfterFilterCondition> objectIdEqualTo(String? value,
+  QueryBuilder<Universe, QAfterFilterCondition> objectIDEqualTo(String? value,
       {bool caseSensitive = true}) {
     return addFilterCondition(FilterCondition(
       type: ConditionType.Eq,
-      property: 'objectId',
+      property: 'objectID',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<Universe, QAfterFilterCondition> objectIdStartsWith(
+  QueryBuilder<Universe, QAfterFilterCondition> objectIDStartsWith(
       String? value,
       {bool caseSensitive = true}) {
     final convertedValue = value;
     assert(convertedValue != null, 'Null values are not allowed');
     return addFilterCondition(FilterCondition(
       type: ConditionType.StartsWith,
-      property: 'objectId',
+      property: 'objectID',
       value: convertedValue,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<Universe, QAfterFilterCondition> objectIdEndsWith(String? value,
+  QueryBuilder<Universe, QAfterFilterCondition> objectIDEndsWith(String? value,
       {bool caseSensitive = true}) {
     final convertedValue = value;
     assert(convertedValue != null, 'Null values are not allowed');
     return addFilterCondition(FilterCondition(
       type: ConditionType.EndsWith,
-      property: 'objectId',
+      property: 'objectID',
       value: convertedValue,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<Universe, QAfterFilterCondition> objectIdContains(String? value,
+  QueryBuilder<Universe, QAfterFilterCondition> objectIDContains(String? value,
       {bool caseSensitive = true}) {
     final convertedValue = value;
     assert(convertedValue != null, 'Null values are not allowed');
     return addFilterCondition(FilterCondition(
       type: ConditionType.Matches,
-      property: 'objectId',
+      property: 'objectID',
       value: '*$convertedValue*',
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<Universe, QAfterFilterCondition> objectIdMatches(String pattern,
+  QueryBuilder<Universe, QAfterFilterCondition> objectIDMatches(String pattern,
       {bool caseSensitive = true}) {
     return addFilterCondition(FilterCondition(
       type: ConditionType.Matches,
-      property: 'objectId',
+      property: 'objectID',
       value: pattern,
       caseSensitive: caseSensitive,
     ));
@@ -658,66 +658,66 @@ extension CharacterQueryFilter on QueryBuilder<Character, QFilterCondition> {
     ));
   }
 
-  QueryBuilder<Character, QAfterFilterCondition> objectIdIsNull() {
+  QueryBuilder<Character, QAfterFilterCondition> objectIDIsNull() {
     return addFilterCondition(FilterCondition(
       type: ConditionType.Eq,
-      property: 'objectId',
+      property: 'objectID',
       value: null,
     ));
   }
 
-  QueryBuilder<Character, QAfterFilterCondition> objectIdEqualTo(String? value,
+  QueryBuilder<Character, QAfterFilterCondition> objectIDEqualTo(String? value,
       {bool caseSensitive = true}) {
     return addFilterCondition(FilterCondition(
       type: ConditionType.Eq,
-      property: 'objectId',
+      property: 'objectID',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<Character, QAfterFilterCondition> objectIdStartsWith(
+  QueryBuilder<Character, QAfterFilterCondition> objectIDStartsWith(
       String? value,
       {bool caseSensitive = true}) {
     final convertedValue = value;
     assert(convertedValue != null, 'Null values are not allowed');
     return addFilterCondition(FilterCondition(
       type: ConditionType.StartsWith,
-      property: 'objectId',
+      property: 'objectID',
       value: convertedValue,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<Character, QAfterFilterCondition> objectIdEndsWith(String? value,
+  QueryBuilder<Character, QAfterFilterCondition> objectIDEndsWith(String? value,
       {bool caseSensitive = true}) {
     final convertedValue = value;
     assert(convertedValue != null, 'Null values are not allowed');
     return addFilterCondition(FilterCondition(
       type: ConditionType.EndsWith,
-      property: 'objectId',
+      property: 'objectID',
       value: convertedValue,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<Character, QAfterFilterCondition> objectIdContains(String? value,
+  QueryBuilder<Character, QAfterFilterCondition> objectIDContains(String? value,
       {bool caseSensitive = true}) {
     final convertedValue = value;
     assert(convertedValue != null, 'Null values are not allowed');
     return addFilterCondition(FilterCondition(
       type: ConditionType.Matches,
-      property: 'objectId',
+      property: 'objectID',
       value: '*$convertedValue*',
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<Character, QAfterFilterCondition> objectIdMatches(String pattern,
+  QueryBuilder<Character, QAfterFilterCondition> objectIDMatches(String pattern,
       {bool caseSensitive = true}) {
     return addFilterCondition(FilterCondition(
       type: ConditionType.Matches,
-      property: 'objectId',
+      property: 'objectID',
       value: pattern,
       caseSensitive: caseSensitive,
     ));
@@ -1110,66 +1110,66 @@ extension CharacterQueryFilter on QueryBuilder<Character, QFilterCondition> {
     ));
   }
 
-  QueryBuilder<Character, QAfterFilterCondition> imageUrlIsNull() {
+  QueryBuilder<Character, QAfterFilterCondition> imageURLIsNull() {
     return addFilterCondition(FilterCondition(
       type: ConditionType.Eq,
-      property: 'imageUrl',
+      property: 'imageURL',
       value: null,
     ));
   }
 
-  QueryBuilder<Character, QAfterFilterCondition> imageUrlEqualTo(String? value,
+  QueryBuilder<Character, QAfterFilterCondition> imageURLEqualTo(String? value,
       {bool caseSensitive = true}) {
     return addFilterCondition(FilterCondition(
       type: ConditionType.Eq,
-      property: 'imageUrl',
+      property: 'imageURL',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<Character, QAfterFilterCondition> imageUrlStartsWith(
+  QueryBuilder<Character, QAfterFilterCondition> imageURLStartsWith(
       String? value,
       {bool caseSensitive = true}) {
     final convertedValue = value;
     assert(convertedValue != null, 'Null values are not allowed');
     return addFilterCondition(FilterCondition(
       type: ConditionType.StartsWith,
-      property: 'imageUrl',
+      property: 'imageURL',
       value: convertedValue,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<Character, QAfterFilterCondition> imageUrlEndsWith(String? value,
+  QueryBuilder<Character, QAfterFilterCondition> imageURLEndsWith(String? value,
       {bool caseSensitive = true}) {
     final convertedValue = value;
     assert(convertedValue != null, 'Null values are not allowed');
     return addFilterCondition(FilterCondition(
       type: ConditionType.EndsWith,
-      property: 'imageUrl',
+      property: 'imageURL',
       value: convertedValue,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<Character, QAfterFilterCondition> imageUrlContains(String? value,
+  QueryBuilder<Character, QAfterFilterCondition> imageURLContains(String? value,
       {bool caseSensitive = true}) {
     final convertedValue = value;
     assert(convertedValue != null, 'Null values are not allowed');
     return addFilterCondition(FilterCondition(
       type: ConditionType.Matches,
-      property: 'imageUrl',
+      property: 'imageURL',
       value: '*$convertedValue*',
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<Character, QAfterFilterCondition> imageUrlMatches(String pattern,
+  QueryBuilder<Character, QAfterFilterCondition> imageURLMatches(String pattern,
       {bool caseSensitive = true}) {
     return addFilterCondition(FilterCondition(
       type: ConditionType.Matches,
-      property: 'imageUrl',
+      property: 'imageURL',
       value: pattern,
       caseSensitive: caseSensitive,
     ));
@@ -1189,12 +1189,12 @@ extension UniverseQueryWhereSortBy on QueryBuilder<Universe, QSortBy> {
     return addSortByInternal('id', Sort.Desc);
   }
 
-  QueryBuilder<Universe, QAfterSortBy> sortByObjectId() {
-    return addSortByInternal('objectId', Sort.Asc);
+  QueryBuilder<Universe, QAfterSortBy> sortByObjectID() {
+    return addSortByInternal('objectID', Sort.Asc);
   }
 
-  QueryBuilder<Universe, QAfterSortBy> sortByObjectIdDesc() {
-    return addSortByInternal('objectId', Sort.Desc);
+  QueryBuilder<Universe, QAfterSortBy> sortByObjectIDDesc() {
+    return addSortByInternal('objectID', Sort.Desc);
   }
 
   QueryBuilder<Universe, QAfterSortBy> sortByName() {
@@ -1223,12 +1223,12 @@ extension UniverseQueryWhereSortThenBy on QueryBuilder<Universe, QSortThenBy> {
     return addSortByInternal('id', Sort.Desc);
   }
 
-  QueryBuilder<Universe, QAfterSortBy> thenByObjectId() {
-    return addSortByInternal('objectId', Sort.Asc);
+  QueryBuilder<Universe, QAfterSortBy> thenByObjectID() {
+    return addSortByInternal('objectID', Sort.Asc);
   }
 
-  QueryBuilder<Universe, QAfterSortBy> thenByObjectIdDesc() {
-    return addSortByInternal('objectId', Sort.Desc);
+  QueryBuilder<Universe, QAfterSortBy> thenByObjectIDDesc() {
+    return addSortByInternal('objectID', Sort.Desc);
   }
 
   QueryBuilder<Universe, QAfterSortBy> thenByName() {
@@ -1257,12 +1257,12 @@ extension CharacterQueryWhereSortBy on QueryBuilder<Character, QSortBy> {
     return addSortByInternal('id', Sort.Desc);
   }
 
-  QueryBuilder<Character, QAfterSortBy> sortByObjectId() {
-    return addSortByInternal('objectId', Sort.Asc);
+  QueryBuilder<Character, QAfterSortBy> sortByObjectID() {
+    return addSortByInternal('objectID', Sort.Asc);
   }
 
-  QueryBuilder<Character, QAfterSortBy> sortByObjectIdDesc() {
-    return addSortByInternal('objectId', Sort.Desc);
+  QueryBuilder<Character, QAfterSortBy> sortByObjectIDDesc() {
+    return addSortByInternal('objectID', Sort.Desc);
   }
 
   QueryBuilder<Character, QAfterSortBy> sortByName() {
@@ -1321,12 +1321,12 @@ extension CharacterQueryWhereSortBy on QueryBuilder<Character, QSortBy> {
     return addSortByInternal('description', Sort.Desc);
   }
 
-  QueryBuilder<Character, QAfterSortBy> sortByImageUrl() {
-    return addSortByInternal('imageUrl', Sort.Asc);
+  QueryBuilder<Character, QAfterSortBy> sortByImageURL() {
+    return addSortByInternal('imageURL', Sort.Asc);
   }
 
-  QueryBuilder<Character, QAfterSortBy> sortByImageUrlDesc() {
-    return addSortByInternal('imageUrl', Sort.Desc);
+  QueryBuilder<Character, QAfterSortBy> sortByImageURLDesc() {
+    return addSortByInternal('imageURL', Sort.Desc);
   }
 }
 
@@ -1340,12 +1340,12 @@ extension CharacterQueryWhereSortThenBy
     return addSortByInternal('id', Sort.Desc);
   }
 
-  QueryBuilder<Character, QAfterSortBy> thenByObjectId() {
-    return addSortByInternal('objectId', Sort.Asc);
+  QueryBuilder<Character, QAfterSortBy> thenByObjectID() {
+    return addSortByInternal('objectID', Sort.Asc);
   }
 
-  QueryBuilder<Character, QAfterSortBy> thenByObjectIdDesc() {
-    return addSortByInternal('objectId', Sort.Desc);
+  QueryBuilder<Character, QAfterSortBy> thenByObjectIDDesc() {
+    return addSortByInternal('objectID', Sort.Desc);
   }
 
   QueryBuilder<Character, QAfterSortBy> thenByName() {
@@ -1404,12 +1404,12 @@ extension CharacterQueryWhereSortThenBy
     return addSortByInternal('description', Sort.Desc);
   }
 
-  QueryBuilder<Character, QAfterSortBy> thenByImageUrl() {
-    return addSortByInternal('imageUrl', Sort.Asc);
+  QueryBuilder<Character, QAfterSortBy> thenByImageURL() {
+    return addSortByInternal('imageURL', Sort.Asc);
   }
 
-  QueryBuilder<Character, QAfterSortBy> thenByImageUrlDesc() {
-    return addSortByInternal('imageUrl', Sort.Desc);
+  QueryBuilder<Character, QAfterSortBy> thenByImageURLDesc() {
+    return addSortByInternal('imageURL', Sort.Desc);
   }
 }
 
@@ -1418,9 +1418,9 @@ extension UniverseQueryWhereDistinct on QueryBuilder<Universe, QDistinct> {
     return addDistinctByInternal('id');
   }
 
-  QueryBuilder<Universe, QDistinct> distinctByObjectId(
+  QueryBuilder<Universe, QDistinct> distinctByObjectID(
       {bool caseSensitive = true}) {
-    return addDistinctByInternal('objectId', caseSensitive: caseSensitive);
+    return addDistinctByInternal('objectID', caseSensitive: caseSensitive);
   }
 
   QueryBuilder<Universe, QDistinct> distinctByName(
@@ -1439,9 +1439,9 @@ extension CharacterQueryWhereDistinct on QueryBuilder<Character, QDistinct> {
     return addDistinctByInternal('id');
   }
 
-  QueryBuilder<Character, QDistinct> distinctByObjectId(
+  QueryBuilder<Character, QDistinct> distinctByObjectID(
       {bool caseSensitive = true}) {
-    return addDistinctByInternal('objectId', caseSensitive: caseSensitive);
+    return addDistinctByInternal('objectID', caseSensitive: caseSensitive);
   }
 
   QueryBuilder<Character, QDistinct> distinctByName(
@@ -1477,9 +1477,9 @@ extension CharacterQueryWhereDistinct on QueryBuilder<Character, QDistinct> {
     return addDistinctByInternal('description', caseSensitive: caseSensitive);
   }
 
-  QueryBuilder<Character, QDistinct> distinctByImageUrl(
+  QueryBuilder<Character, QDistinct> distinctByImageURL(
       {bool caseSensitive = true}) {
-    return addDistinctByInternal('imageUrl', caseSensitive: caseSensitive);
+    return addDistinctByInternal('imageURL', caseSensitive: caseSensitive);
   }
 }
 
@@ -1488,8 +1488,8 @@ extension UniverseQueryProperty on QueryBuilder<Universe, QQueryProperty> {
     return addPropertyName('id');
   }
 
-  QueryBuilder<String?, QQueryOperations> objectIdProperty() {
-    return addPropertyName('objectId');
+  QueryBuilder<String?, QQueryOperations> objectIDProperty() {
+    return addPropertyName('objectID');
   }
 
   QueryBuilder<String?, QQueryOperations> nameProperty() {
@@ -1506,8 +1506,8 @@ extension CharacterQueryProperty on QueryBuilder<Character, QQueryProperty> {
     return addPropertyName('id');
   }
 
-  QueryBuilder<String?, QQueryOperations> objectIdProperty() {
-    return addPropertyName('objectId');
+  QueryBuilder<String?, QQueryOperations> objectIDProperty() {
+    return addPropertyName('objectID');
   }
 
   QueryBuilder<String?, QQueryOperations> nameProperty() {
@@ -1538,7 +1538,7 @@ extension CharacterQueryProperty on QueryBuilder<Character, QQueryProperty> {
     return addPropertyName('description');
   }
 
-  QueryBuilder<String?, QQueryOperations> imageUrlProperty() {
-    return addPropertyName('imageUrl');
+  QueryBuilder<String?, QQueryOperations> imageURLProperty() {
+    return addPropertyName('imageURL');
   }
 }

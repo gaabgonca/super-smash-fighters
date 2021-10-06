@@ -47,7 +47,7 @@ class Character {
   CharacterDomain toDomain() {
     return CharacterDomain(
         id: this.id ?? 0,
-        objectId: this.objectID!,
+        objectId: this.objectID ?? "",
         name: this.name!,
         universe: this.universe!,
         price: this.price!,
@@ -60,13 +60,13 @@ class Character {
 
   factory Character.fromJson(Map<String, dynamic> json) => Character(
       id: json['id'],
-      objectID: json['objectID'],
+      objectID: json["objectID"],
       name: json['name'],
       universe: json['universe'],
       price: json['price'],
       popular: json['popular'],
       rate: json['rate'],
       downloads: json['downloads'],
-      imageURL: json['imageURL'],
+      imageURL: json["imageURL"],
       description: json['description']);
 }

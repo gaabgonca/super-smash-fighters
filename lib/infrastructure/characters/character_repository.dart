@@ -7,7 +7,9 @@ import 'package:super_smash_fighters/domain/character_list/character_failure.dar
 import 'package:dartz/dartz.dart';
 import 'package:super_smash_fighters/domain/character_list/i_character_repository.dart';
 import 'package:super_smash_fighters/domain/core/character.dart';
+import 'package:super_smash_fighters/domain/core/universe.dart';
 import 'package:super_smash_fighters/infrastructure/characters/character_dto.dart';
+import 'package:super_smash_fighters/isar.g.dart';
 
 @LazySingleton(as: ICharacterRepository)
 class CharacterRepository implements ICharacterRepository {
@@ -37,7 +39,7 @@ class CharacterRepository implements ICharacterRepository {
     var cachedCharacters = await characterCollection.where().findAll();
     if (cachedCharacters.isEmpty) {
       try {
-        final characters = await getCharacters();
+        final characters = await _getCharacters();
         await isar.writeTxn((_) async {
           await characterCollection.putAll(characters);
         });
@@ -52,8 +54,12 @@ class CharacterRepository implements ICharacterRepository {
     return right(charactersDomain);
   }
 
-  Future<List<Character>> getCharacters() async {
-    final Response response = await httpClient.get(Uri.parse(url));
+  Future<List<Character>> _getCharacters({UniverseDomain? universe}) async {
+    String newUrl = url;
+    if (universe != null) {
+      newUrl = url + '?universe=${universe.name}';
+    }
+    final Response response = await httpClient.get(Uri.parse(newUrl));
     final decodedResponse =
         jsonDecode(utf8.decode(response.bodyBytes)) as List<dynamic>;
     final characters = decodedResponse
@@ -72,6 +78,57 @@ class CharacterRepository implements ICharacterRepository {
     }
     final charactersDomain = cachedCharacters
         .map((characterDto) => characterDto.toDomain() as CharacterDomain)
+        .toList();
+    return right(charactersDomain);
+  }
+
+  @override
+  Future<Either<CharacterFailure, List<CharacterDomain>>> watchFromUniverse(
+      UniverseDomain universe) async {
+    final IsarCollection<Character> characterCollection =
+        isar.getCollection('Character');
+    var cachedCharacters = await characterCollection
+        .where()
+        .filter()
+        .universeEqualTo(universe.name)
+        .findAll();
+    if (cachedCharacters.isEmpty) {
+      try {
+        final characters = await _getCharacters(universe: universe);
+        await isar.writeTxn((_) async {
+          await characterCollection.putAll(characters);
+        });
+      } catch (e) {
+        return left(CharacterFailure.unexpected());
+      }
+    }
+    cachedCharacters = await characterCollection
+        .where()
+        .filter()
+        .universeEqualTo(universe.name)
+        .findAll();
+    final charactersDomain = cachedCharacters
+        .map((characterDto) => characterDto.toDomain())
+        .toList();
+    return right(charactersDomain);
+  }
+
+  @override
+  Future<Either<CharacterFailure, List<CharacterDomain>>>
+      watchFromUniverseOffline(UniverseDomain universe) async {
+    final IsarCollection<Character> characterCollection =
+        isar.getCollection('Character');
+    var cachedCharacters = await characterCollection
+        .where()
+        .filter()
+        .universeEqualTo(universe.name)
+        .findAll();
+
+    if (cachedCharacters.isEmpty) {
+      return left(CharacterFailure.noDataFound());
+    }
+    final charactersDomain = cachedCharacters
+        .map((characterDto) => characterDto.toDomain())
         .toList();
     return right(charactersDomain);
   }
