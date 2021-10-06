@@ -7,6 +7,8 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
+import '../../domain/core/character.dart' as _i9;
+import '../character_detail/character_detail_page.dart' as _i8;
 import '../character_list/character_list_page.dart' as _i7;
 import '../onboarding/first_page.dart' as _i4;
 import '../onboarding/second_page.dart' as _i5;
@@ -43,6 +45,12 @@ class AppRouter extends _i1.RootStackRouter {
         routeData: routeData,
         builder: (_) {
           return const _i7.CharacterListPage();
+        }),
+    CharacterDetailPageRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (data) {
+          final args = data.argsAs<CharacterDetailPageRouteArgs>();
+          return _i8.CharacterDetailPage(args.character, key: args.key);
         })
   };
 
@@ -53,7 +61,9 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(SecondPageRoute.name, path: '/second-page'),
         _i1.RouteConfig(ThirdPageRoute.name, path: '/third-page'),
         _i1.RouteConfig(CharacterListPageRoute.name,
-            path: '/character-list-page')
+            path: '/character-list-page'),
+        _i1.RouteConfig(CharacterDetailPageRoute.name,
+            path: '/character-detail-page')
       ];
 }
 
@@ -85,4 +95,23 @@ class CharacterListPageRoute extends _i1.PageRouteInfo {
   const CharacterListPageRoute() : super(name, path: '/character-list-page');
 
   static const String name = 'CharacterListPageRoute';
+}
+
+class CharacterDetailPageRoute
+    extends _i1.PageRouteInfo<CharacterDetailPageRouteArgs> {
+  CharacterDetailPageRoute(
+      {required _i9.CharacterDomain character, _i2.Key? key})
+      : super(name,
+            path: '/character-detail-page',
+            args: CharacterDetailPageRouteArgs(character: character, key: key));
+
+  static const String name = 'CharacterDetailPageRoute';
+}
+
+class CharacterDetailPageRouteArgs {
+  const CharacterDetailPageRouteArgs({required this.character, this.key});
+
+  final _i9.CharacterDomain character;
+
+  final _i2.Key? key;
 }

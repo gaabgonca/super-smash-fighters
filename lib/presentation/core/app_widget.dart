@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Super Smash Catalog',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
       ),
     );
   }

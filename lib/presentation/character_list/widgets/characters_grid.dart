@@ -36,7 +36,7 @@ class CharactersGrid extends StatelessWidget {
           Flexible(
             flex: 1,
             child: Padding(
-              padding: EdgeInsets.only(left: 14, right: 14, top: 14),
+              padding: EdgeInsets.only(left: 21, right: 21, top: 14),
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     childAspectRatio: 0.8022,
