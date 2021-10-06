@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,8 @@ import 'package:super_smash_fighters/domain/universe_list/i_universe_repository.
 import 'package:super_smash_fighters/domain/universe_list/universe_failure.dart';
 import 'package:super_smash_fighters/infrastructure/universes/universe_repository.dart';
 import 'package:super_smash_fighters/injection.dart';
+import 'package:super_smash_fighters/presentation/character_list/widgets/character_card.dart';
+import 'package:super_smash_fighters/presentation/character_list/widgets/characters_grid.dart';
 import 'package:super_smash_fighters/presentation/character_list/widgets/universes_list.dart';
 import 'package:super_smash_fighters/presentation/core/colors.dart';
 import 'package:super_smash_fighters/presentation/core/build_context_x.dart';
@@ -69,10 +72,10 @@ class CharacterListPage extends StatelessWidget {
                 builder: (context, state) {
                   return state.map(
                     initial: (_) => Container(),
-                    loadInProgress: (_) =>
-                        const Center(child: CircularProgressIndicator()),
-                    loadSuccess: (state) =>
-                        _charactersGrid(state.characters, context),
+                    loadInProgress: (_) => Expanded(
+                        child:
+                            const Center(child: CircularProgressIndicator())),
+                    loadSuccess: (state) => CharactersGrid(state.characters),
                     loadFailure: (failure) =>
                         const Center(child: Text('Characters load failure')),
                     deleteFailure: (failure) =>
@@ -86,46 +89,4 @@ class CharacterListPage extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _charactersGrid(List<CharacterDomain> characters, BuildContext context) {
-  return Container(
-    child: Expanded(
-      child: Padding(
-        padding: EdgeInsets.all(14),
-        child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 0.8022,
-                crossAxisCount: 2,
-                crossAxisSpacing: 19,
-                mainAxisSpacing: 15),
-            itemBuilder: (context, index) {
-              final character = characters[index];
-              return _characterCard(character);
-            }),
-      ),
-    ),
-  );
-}
-
-Widget _characterCard(CharacterDomain character) {
-  return Column(
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      AspectRatio(
-        aspectRatio: 1,
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPictureBackgroundColor,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: kPictureBorderGray, width: 1)),
-        ),
-      ),
-      Text(
-        character.name.toUpperCase(),
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      Text(character.universe.toUpperCase())
-    ],
-  );
 }

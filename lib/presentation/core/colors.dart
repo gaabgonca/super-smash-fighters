@@ -19,3 +19,5 @@ const Color kOverlayDarkBlue = Color(0xFF142246);
 const Color kPictureBorderGray = Color(0xFFEAEAEA);
 
 const Color kPictureBackgroundColor = Color(0xFFFBFBFB);
+
+const Color kTitleLineColor = Color(0xFF979797);
