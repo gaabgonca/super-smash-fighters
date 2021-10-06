@@ -131,11 +131,14 @@ Widget _mainButton(
     padding: EdgeInsets.symmetric(horizontal: context.widthPx * 0.242),
     child: ElevatedButton(
       style: ButtonStyle(
-          elevation: MaterialStateProperty.all<double>(0),
-          backgroundColor: MaterialStateProperty.all<Color>(kMainFuchsia),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100)))),
+        elevation: MaterialStateProperty.all<double>(0),
+        backgroundColor: MaterialStateProperty.all<Color>(kMainFuchsia),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+          ),
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 13),
         child: Text(buttonText,

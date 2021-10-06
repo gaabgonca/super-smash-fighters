@@ -20,7 +20,7 @@ class UniverseRepository implements IUniverseRepository {
   UniverseRepository(this.isar, this.httpClient);
 
   @override
-  Stream<Either<UniverseFailure, List<UniverseDomain>>> watchAll() async* {
+  Future<Either<UniverseFailure, List<UniverseDomain>>> watchAll() async {
     final universesCollection = isar.getCollection('Universe');
     var cachedUniverses = await universesCollection.where().findAll();
     if (cachedUniverses.isEmpty) {
@@ -30,14 +30,15 @@ class UniverseRepository implements IUniverseRepository {
           await universesCollection.putAll(universes);
         });
       } catch (e) {
-        yield left(UniverseFailure.unexpectedUniverse());
+        return left(UniverseFailure.unexpectedUniverse());
       }
     }
     cachedUniverses = await universesCollection.where().findAll();
-    final universesDomain = cachedUniverses
+    var universesDomain = cachedUniverses
         .map((universeDto) => universeDto.toDomain() as UniverseDomain)
         .toList();
-    yield right(universesDomain);
+    universesDomain.insert(0, UniverseDomain.empty());
+    return right(universesDomain);
   }
 
   @override
@@ -71,9 +72,10 @@ class UniverseRepository implements IUniverseRepository {
     if (cachedUniverses.isEmpty) {
       return right([]);
     }
-    final universesDomain = cachedUniverses
+    var universesDomain = cachedUniverses
         .map((universeDto) => universeDto.toDomain() as UniverseDomain)
         .toList();
+    universesDomain.insert(0, UniverseDomain.empty());
     return right(universesDomain);
   }
 }

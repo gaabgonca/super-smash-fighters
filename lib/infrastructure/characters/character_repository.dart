@@ -32,7 +32,7 @@ class CharacterRepository implements ICharacterRepository {
   }
 
   @override
-  Stream<Either<CharacterFailure, List<CharacterDomain>>> watchAll() async* {
+  Future<Either<CharacterFailure, List<CharacterDomain>>> watchAll() async {
     final characterCollection = isar.getCollection('Character');
     var cachedCharacters = await characterCollection.where().findAll();
     if (cachedCharacters.isEmpty) {
@@ -42,14 +42,14 @@ class CharacterRepository implements ICharacterRepository {
           await characterCollection.putAll(characters);
         });
       } catch (e) {
-        yield left(CharacterFailure.unexpected());
+        return left(CharacterFailure.unexpected());
       }
     }
     cachedCharacters = await characterCollection.where().findAll();
     final charactersDomain = cachedCharacters
         .map((characterDto) => characterDto.toDomain() as CharacterDomain)
         .toList();
-    yield right(charactersDomain);
+    return right(charactersDomain);
   }
 
   Future<List<Character>> getCharacters() async {

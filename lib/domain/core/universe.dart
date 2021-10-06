@@ -16,7 +16,7 @@ abstract class UniverseDomain implements _$UniverseDomain {
   factory UniverseDomain.empty() => UniverseDomain(
         id: 0,
         objectId: '',
-        name: '',
+        name: 'All',
         description: '',
       );
   factory UniverseDomain.fromJson(Map<String, dynamic> json) =>
