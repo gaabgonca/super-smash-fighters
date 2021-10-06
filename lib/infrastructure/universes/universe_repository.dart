@@ -62,4 +62,18 @@ class UniverseRepository implements IUniverseRepository {
         .toList();
     return universes;
   }
+
+  @override
+  Future<Either<UniverseFailure, List<UniverseDomain>>>
+      watchAllOffline() async {
+    final universesCollection = isar.getCollection('Universe');
+    var cachedUniverses = await universesCollection.where().findAll();
+    if (cachedUniverses.isEmpty) {
+      return right([]);
+    }
+    final universesDomain = cachedUniverses
+        .map((universeDto) => universeDto.toDomain() as UniverseDomain)
+        .toList();
+    return right(universesDomain);
+  }
 }

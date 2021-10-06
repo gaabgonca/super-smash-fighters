@@ -61,4 +61,18 @@ class CharacterRepository implements ICharacterRepository {
         .toList();
     return characters;
   }
+
+  @override
+  Future<Either<CharacterFailure, List<CharacterDomain>>>
+      watchAllOffline() async {
+    final characterCollection = isar.getCollection('Character');
+    var cachedCharacters = await characterCollection.where().findAll();
+    if (cachedCharacters.isEmpty) {
+      return right([]);
+    }
+    final charactersDomain = cachedCharacters
+        .map((characterDto) => characterDto.toDomain() as CharacterDomain)
+        .toList();
+    return right(charactersDomain);
+  }
 }
