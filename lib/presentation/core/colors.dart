@@ -23,3 +23,5 @@ const Color kPictureBackgroundColor = Color(0xFFFBFBFB);
 const Color kTitleLineColor = Color(0xFF979797);
 
 const Color kFiltersGreen = Color(0xFF64C328);
+
+const Color kFiltersGray = Color(0xFFB6B6B6);
