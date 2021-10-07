@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ import 'package:super_smash_fighters/presentation/character_list/widgets/charact
 import 'package:super_smash_fighters/presentation/character_list/widgets/universes_list.dart';
 import 'package:super_smash_fighters/presentation/core/colors.dart';
 import 'package:super_smash_fighters/presentation/core/build_context_x.dart';
+import 'package:super_smash_fighters/presentation/routes/router.gr.dart';
 
 @injectable
 class CharacterListPage extends StatelessWidget {
@@ -30,14 +32,20 @@ class CharacterListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Fighters',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
+          centerTitle: true,
+          title: Text(
+            'Fighters',
+            style: TextStyle(color: Colors.black, fontSize: 27),
+          ),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.filter_list),
+              color: Colors.black,
+              onPressed: () => AutoRouter.of(context).push(FiltersPageRoute()),
+            )
+          ]),
       body: MultiBlocProvider(
         providers: [
           BlocProvider<UniversesBloc>(create: (context) {
