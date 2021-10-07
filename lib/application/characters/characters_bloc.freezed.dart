@@ -17,21 +17,27 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CharactersEventTearOff {
   const _$CharactersEventTearOff();
 
-  _WatchUniverseCharacters watchUniverseStarted(UniverseDomain universe) {
+  _WatchUniverseCharacters watchUniverseStarted(UniverseDomain universe,
+      {FiltersState? filtersState}) {
     return _WatchUniverseCharacters(
       universe,
+      filtersState: filtersState,
     );
   }
 
   _CharactersReceived charactersReceived(
-      Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters) {
+      Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+      {FiltersState? filtersState}) {
     return _CharactersReceived(
       failureOrCharacters,
+      filtersState: filtersState,
     );
   }
 
-  _DeleteAllCharacters deleteAll() {
-    return const _DeleteAllCharacters();
+  _DeleteAllCharacters deleteAll(UniverseDomain universe) {
+    return _DeleteAllCharacters(
+      universe,
+    );
   }
 }
 
@@ -42,31 +48,36 @@ const $CharactersEvent = _$CharactersEventTearOff();
 mixin _$CharactersEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UniverseDomain universe) watchUniverseStarted,
     required TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters)
+            UniverseDomain universe, FiltersState? filtersState)
+        watchUniverseStarted,
+    required TResult Function(
+            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+            FiltersState? filtersState)
         charactersReceived,
-    required TResult Function() deleteAll,
+    required TResult Function(UniverseDomain universe) deleteAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(UniverseDomain universe)? watchUniverseStarted,
+    TResult Function(UniverseDomain universe, FiltersState? filtersState)?
+        watchUniverseStarted,
     TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>>
-                failureOrCharacters)?
+            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+            FiltersState? filtersState)?
         charactersReceived,
-    TResult Function()? deleteAll,
+    TResult Function(UniverseDomain universe)? deleteAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UniverseDomain universe)? watchUniverseStarted,
+    TResult Function(UniverseDomain universe, FiltersState? filtersState)?
+        watchUniverseStarted,
     TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>>
-                failureOrCharacters)?
+            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+            FiltersState? filtersState)?
         charactersReceived,
-    TResult Function()? deleteAll,
+    TResult Function(UniverseDomain universe)? deleteAll,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,9 +128,10 @@ abstract class _$WatchUniverseCharactersCopyWith<$Res> {
   factory _$WatchUniverseCharactersCopyWith(_WatchUniverseCharacters value,
           $Res Function(_WatchUniverseCharacters) then) =
       __$WatchUniverseCharactersCopyWithImpl<$Res>;
-  $Res call({UniverseDomain universe});
+  $Res call({UniverseDomain universe, FiltersState? filtersState});
 
   $UniverseDomainCopyWith<$Res> get universe;
+  $FiltersStateCopyWith<$Res>? get filtersState;
 }
 
 /// @nodoc
@@ -137,12 +149,17 @@ class __$WatchUniverseCharactersCopyWithImpl<$Res>
   @override
   $Res call({
     Object? universe = freezed,
+    Object? filtersState = freezed,
   }) {
     return _then(_WatchUniverseCharacters(
       universe == freezed
           ? _value.universe
           : universe // ignore: cast_nullable_to_non_nullable
               as UniverseDomain,
+      filtersState: filtersState == freezed
+          ? _value.filtersState
+          : filtersState // ignore: cast_nullable_to_non_nullable
+              as FiltersState?,
     ));
   }
 
@@ -152,19 +169,32 @@ class __$WatchUniverseCharactersCopyWithImpl<$Res>
       return _then(_value.copyWith(universe: value));
     });
   }
+
+  @override
+  $FiltersStateCopyWith<$Res>? get filtersState {
+    if (_value.filtersState == null) {
+      return null;
+    }
+
+    return $FiltersStateCopyWith<$Res>(_value.filtersState!, (value) {
+      return _then(_value.copyWith(filtersState: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_WatchUniverseCharacters implements _WatchUniverseCharacters {
-  const _$_WatchUniverseCharacters(this.universe);
+  const _$_WatchUniverseCharacters(this.universe, {this.filtersState});
 
   @override
   final UniverseDomain universe;
+  @override
+  final FiltersState? filtersState;
 
   @override
   String toString() {
-    return 'CharactersEvent.watchUniverseStarted(universe: $universe)';
+    return 'CharactersEvent.watchUniverseStarted(universe: $universe, filtersState: $filtersState)';
   }
 
   @override
@@ -173,12 +203,17 @@ class _$_WatchUniverseCharacters implements _WatchUniverseCharacters {
         (other is _WatchUniverseCharacters &&
             (identical(other.universe, universe) ||
                 const DeepCollectionEquality()
-                    .equals(other.universe, universe)));
+                    .equals(other.universe, universe)) &&
+            (identical(other.filtersState, filtersState) ||
+                const DeepCollectionEquality()
+                    .equals(other.filtersState, filtersState)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(universe);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(universe) ^
+      const DeepCollectionEquality().hash(filtersState);
 
   @JsonKey(ignore: true)
   @override
@@ -189,41 +224,46 @@ class _$_WatchUniverseCharacters implements _WatchUniverseCharacters {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UniverseDomain universe) watchUniverseStarted,
     required TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters)
+            UniverseDomain universe, FiltersState? filtersState)
+        watchUniverseStarted,
+    required TResult Function(
+            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+            FiltersState? filtersState)
         charactersReceived,
-    required TResult Function() deleteAll,
+    required TResult Function(UniverseDomain universe) deleteAll,
   }) {
-    return watchUniverseStarted(universe);
+    return watchUniverseStarted(universe, filtersState);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(UniverseDomain universe)? watchUniverseStarted,
+    TResult Function(UniverseDomain universe, FiltersState? filtersState)?
+        watchUniverseStarted,
     TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>>
-                failureOrCharacters)?
+            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+            FiltersState? filtersState)?
         charactersReceived,
-    TResult Function()? deleteAll,
+    TResult Function(UniverseDomain universe)? deleteAll,
   }) {
-    return watchUniverseStarted?.call(universe);
+    return watchUniverseStarted?.call(universe, filtersState);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UniverseDomain universe)? watchUniverseStarted,
+    TResult Function(UniverseDomain universe, FiltersState? filtersState)?
+        watchUniverseStarted,
     TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>>
-                failureOrCharacters)?
+            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+            FiltersState? filtersState)?
         charactersReceived,
-    TResult Function()? deleteAll,
+    TResult Function(UniverseDomain universe)? deleteAll,
     required TResult orElse(),
   }) {
     if (watchUniverseStarted != null) {
-      return watchUniverseStarted(universe);
+      return watchUniverseStarted(universe, filtersState);
     }
     return orElse();
   }
@@ -265,10 +305,11 @@ class _$_WatchUniverseCharacters implements _WatchUniverseCharacters {
 }
 
 abstract class _WatchUniverseCharacters implements CharactersEvent {
-  const factory _WatchUniverseCharacters(UniverseDomain universe) =
-      _$_WatchUniverseCharacters;
+  const factory _WatchUniverseCharacters(UniverseDomain universe,
+      {FiltersState? filtersState}) = _$_WatchUniverseCharacters;
 
   UniverseDomain get universe => throw _privateConstructorUsedError;
+  FiltersState? get filtersState => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$WatchUniverseCharactersCopyWith<_WatchUniverseCharacters> get copyWith =>
       throw _privateConstructorUsedError;
@@ -280,7 +321,10 @@ abstract class _$CharactersReceivedCopyWith<$Res> {
           _CharactersReceived value, $Res Function(_CharactersReceived) then) =
       __$CharactersReceivedCopyWithImpl<$Res>;
   $Res call(
-      {Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters});
+      {Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+      FiltersState? filtersState});
+
+  $FiltersStateCopyWith<$Res>? get filtersState;
 }
 
 /// @nodoc
@@ -297,27 +341,45 @@ class __$CharactersReceivedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? failureOrCharacters = freezed,
+    Object? filtersState = freezed,
   }) {
     return _then(_CharactersReceived(
       failureOrCharacters == freezed
           ? _value.failureOrCharacters
           : failureOrCharacters // ignore: cast_nullable_to_non_nullable
               as Either<CharacterFailure, List<CharacterDomain>>,
+      filtersState: filtersState == freezed
+          ? _value.filtersState
+          : filtersState // ignore: cast_nullable_to_non_nullable
+              as FiltersState?,
     ));
+  }
+
+  @override
+  $FiltersStateCopyWith<$Res>? get filtersState {
+    if (_value.filtersState == null) {
+      return null;
+    }
+
+    return $FiltersStateCopyWith<$Res>(_value.filtersState!, (value) {
+      return _then(_value.copyWith(filtersState: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_CharactersReceived implements _CharactersReceived {
-  const _$_CharactersReceived(this.failureOrCharacters);
+  const _$_CharactersReceived(this.failureOrCharacters, {this.filtersState});
 
   @override
   final Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters;
+  @override
+  final FiltersState? filtersState;
 
   @override
   String toString() {
-    return 'CharactersEvent.charactersReceived(failureOrCharacters: $failureOrCharacters)';
+    return 'CharactersEvent.charactersReceived(failureOrCharacters: $failureOrCharacters, filtersState: $filtersState)';
   }
 
   @override
@@ -326,13 +388,17 @@ class _$_CharactersReceived implements _CharactersReceived {
         (other is _CharactersReceived &&
             (identical(other.failureOrCharacters, failureOrCharacters) ||
                 const DeepCollectionEquality()
-                    .equals(other.failureOrCharacters, failureOrCharacters)));
+                    .equals(other.failureOrCharacters, failureOrCharacters)) &&
+            (identical(other.filtersState, filtersState) ||
+                const DeepCollectionEquality()
+                    .equals(other.filtersState, filtersState)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(failureOrCharacters);
+      const DeepCollectionEquality().hash(failureOrCharacters) ^
+      const DeepCollectionEquality().hash(filtersState);
 
   @JsonKey(ignore: true)
   @override
@@ -342,41 +408,46 @@ class _$_CharactersReceived implements _CharactersReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UniverseDomain universe) watchUniverseStarted,
     required TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters)
+            UniverseDomain universe, FiltersState? filtersState)
+        watchUniverseStarted,
+    required TResult Function(
+            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+            FiltersState? filtersState)
         charactersReceived,
-    required TResult Function() deleteAll,
+    required TResult Function(UniverseDomain universe) deleteAll,
   }) {
-    return charactersReceived(failureOrCharacters);
+    return charactersReceived(failureOrCharacters, filtersState);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(UniverseDomain universe)? watchUniverseStarted,
+    TResult Function(UniverseDomain universe, FiltersState? filtersState)?
+        watchUniverseStarted,
     TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>>
-                failureOrCharacters)?
+            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+            FiltersState? filtersState)?
         charactersReceived,
-    TResult Function()? deleteAll,
+    TResult Function(UniverseDomain universe)? deleteAll,
   }) {
-    return charactersReceived?.call(failureOrCharacters);
+    return charactersReceived?.call(failureOrCharacters, filtersState);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UniverseDomain universe)? watchUniverseStarted,
+    TResult Function(UniverseDomain universe, FiltersState? filtersState)?
+        watchUniverseStarted,
     TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>>
-                failureOrCharacters)?
+            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+            FiltersState? filtersState)?
         charactersReceived,
-    TResult Function()? deleteAll,
+    TResult Function(UniverseDomain universe)? deleteAll,
     required TResult orElse(),
   }) {
     if (charactersReceived != null) {
-      return charactersReceived(failureOrCharacters);
+      return charactersReceived(failureOrCharacters, filtersState);
     }
     return orElse();
   }
@@ -419,11 +490,12 @@ class _$_CharactersReceived implements _CharactersReceived {
 
 abstract class _CharactersReceived implements CharactersEvent {
   const factory _CharactersReceived(
-          Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters) =
-      _$_CharactersReceived;
+      Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+      {FiltersState? filtersState}) = _$_CharactersReceived;
 
   Either<CharacterFailure, List<CharacterDomain>> get failureOrCharacters =>
       throw _privateConstructorUsedError;
+  FiltersState? get filtersState => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$CharactersReceivedCopyWith<_CharactersReceived> get copyWith =>
       throw _privateConstructorUsedError;
@@ -434,6 +506,9 @@ abstract class _$DeleteAllCharactersCopyWith<$Res> {
   factory _$DeleteAllCharactersCopyWith(_DeleteAllCharacters value,
           $Res Function(_DeleteAllCharacters) then) =
       __$DeleteAllCharactersCopyWithImpl<$Res>;
+  $Res call({UniverseDomain universe});
+
+  $UniverseDomainCopyWith<$Res> get universe;
 }
 
 /// @nodoc
@@ -446,64 +521,102 @@ class __$DeleteAllCharactersCopyWithImpl<$Res>
 
   @override
   _DeleteAllCharacters get _value => super._value as _DeleteAllCharacters;
+
+  @override
+  $Res call({
+    Object? universe = freezed,
+  }) {
+    return _then(_DeleteAllCharacters(
+      universe == freezed
+          ? _value.universe
+          : universe // ignore: cast_nullable_to_non_nullable
+              as UniverseDomain,
+    ));
+  }
+
+  @override
+  $UniverseDomainCopyWith<$Res> get universe {
+    return $UniverseDomainCopyWith<$Res>(_value.universe, (value) {
+      return _then(_value.copyWith(universe: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_DeleteAllCharacters implements _DeleteAllCharacters {
-  const _$_DeleteAllCharacters();
+  const _$_DeleteAllCharacters(this.universe);
+
+  @override
+  final UniverseDomain universe;
 
   @override
   String toString() {
-    return 'CharactersEvent.deleteAll()';
+    return 'CharactersEvent.deleteAll(universe: $universe)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _DeleteAllCharacters);
+    return identical(this, other) ||
+        (other is _DeleteAllCharacters &&
+            (identical(other.universe, universe) ||
+                const DeepCollectionEquality()
+                    .equals(other.universe, universe)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(universe);
+
+  @JsonKey(ignore: true)
+  @override
+  _$DeleteAllCharactersCopyWith<_DeleteAllCharacters> get copyWith =>
+      __$DeleteAllCharactersCopyWithImpl<_DeleteAllCharacters>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UniverseDomain universe) watchUniverseStarted,
     required TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters)
+            UniverseDomain universe, FiltersState? filtersState)
+        watchUniverseStarted,
+    required TResult Function(
+            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+            FiltersState? filtersState)
         charactersReceived,
-    required TResult Function() deleteAll,
+    required TResult Function(UniverseDomain universe) deleteAll,
   }) {
-    return deleteAll();
+    return deleteAll(universe);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(UniverseDomain universe)? watchUniverseStarted,
+    TResult Function(UniverseDomain universe, FiltersState? filtersState)?
+        watchUniverseStarted,
     TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>>
-                failureOrCharacters)?
+            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+            FiltersState? filtersState)?
         charactersReceived,
-    TResult Function()? deleteAll,
+    TResult Function(UniverseDomain universe)? deleteAll,
   }) {
-    return deleteAll?.call();
+    return deleteAll?.call(universe);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UniverseDomain universe)? watchUniverseStarted,
+    TResult Function(UniverseDomain universe, FiltersState? filtersState)?
+        watchUniverseStarted,
     TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>>
-                failureOrCharacters)?
+            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters,
+            FiltersState? filtersState)?
         charactersReceived,
-    TResult Function()? deleteAll,
+    TResult Function(UniverseDomain universe)? deleteAll,
     required TResult orElse(),
   }) {
     if (deleteAll != null) {
-      return deleteAll();
+      return deleteAll(universe);
     }
     return orElse();
   }
@@ -545,7 +658,13 @@ class _$_DeleteAllCharacters implements _DeleteAllCharacters {
 }
 
 abstract class _DeleteAllCharacters implements CharactersEvent {
-  const factory _DeleteAllCharacters() = _$_DeleteAllCharacters;
+  const factory _DeleteAllCharacters(UniverseDomain universe) =
+      _$_DeleteAllCharacters;
+
+  UniverseDomain get universe => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$DeleteAllCharactersCopyWith<_DeleteAllCharacters> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -560,9 +679,11 @@ class _$CharactersStateTearOff {
     return const _CharactersLoadInProgress();
   }
 
-  _CharactersLoadSuccess loadSuccess(List<CharacterDomain> characters) {
+  _CharactersLoadSuccess loadSuccess(
+      List<CharacterDomain> characters, bool hasFilter) {
     return _CharactersLoadSuccess(
       characters,
+      hasFilter,
     );
   }
 
@@ -588,7 +709,8 @@ mixin _$CharactersState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<CharacterDomain> characters) loadSuccess,
+    required TResult Function(List<CharacterDomain> characters, bool hasFilter)
+        loadSuccess,
     required TResult Function(CharacterFailure failure) loadFailure,
     required TResult Function(CharacterFailure failure) deleteFailure,
   }) =>
@@ -597,7 +719,8 @@ mixin _$CharactersState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<CharacterDomain> characters)? loadSuccess,
+    TResult Function(List<CharacterDomain> characters, bool hasFilter)?
+        loadSuccess,
     TResult Function(CharacterFailure failure)? loadFailure,
     TResult Function(CharacterFailure failure)? deleteFailure,
   }) =>
@@ -606,7 +729,8 @@ mixin _$CharactersState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<CharacterDomain> characters)? loadSuccess,
+    TResult Function(List<CharacterDomain> characters, bool hasFilter)?
+        loadSuccess,
     TResult Function(CharacterFailure failure)? loadFailure,
     TResult Function(CharacterFailure failure)? deleteFailure,
     required TResult orElse(),
@@ -698,7 +822,8 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<CharacterDomain> characters) loadSuccess,
+    required TResult Function(List<CharacterDomain> characters, bool hasFilter)
+        loadSuccess,
     required TResult Function(CharacterFailure failure) loadFailure,
     required TResult Function(CharacterFailure failure) deleteFailure,
   }) {
@@ -710,7 +835,8 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<CharacterDomain> characters)? loadSuccess,
+    TResult Function(List<CharacterDomain> characters, bool hasFilter)?
+        loadSuccess,
     TResult Function(CharacterFailure failure)? loadFailure,
     TResult Function(CharacterFailure failure)? deleteFailure,
   }) {
@@ -722,7 +848,8 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<CharacterDomain> characters)? loadSuccess,
+    TResult Function(List<CharacterDomain> characters, bool hasFilter)?
+        loadSuccess,
     TResult Function(CharacterFailure failure)? loadFailure,
     TResult Function(CharacterFailure failure)? deleteFailure,
     required TResult orElse(),
@@ -821,7 +948,8 @@ class _$_CharactersLoadInProgress implements _CharactersLoadInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<CharacterDomain> characters) loadSuccess,
+    required TResult Function(List<CharacterDomain> characters, bool hasFilter)
+        loadSuccess,
     required TResult Function(CharacterFailure failure) loadFailure,
     required TResult Function(CharacterFailure failure) deleteFailure,
   }) {
@@ -833,7 +961,8 @@ class _$_CharactersLoadInProgress implements _CharactersLoadInProgress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<CharacterDomain> characters)? loadSuccess,
+    TResult Function(List<CharacterDomain> characters, bool hasFilter)?
+        loadSuccess,
     TResult Function(CharacterFailure failure)? loadFailure,
     TResult Function(CharacterFailure failure)? deleteFailure,
   }) {
@@ -845,7 +974,8 @@ class _$_CharactersLoadInProgress implements _CharactersLoadInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<CharacterDomain> characters)? loadSuccess,
+    TResult Function(List<CharacterDomain> characters, bool hasFilter)?
+        loadSuccess,
     TResult Function(CharacterFailure failure)? loadFailure,
     TResult Function(CharacterFailure failure)? deleteFailure,
     required TResult orElse(),
@@ -906,7 +1036,7 @@ abstract class _$CharactersLoadSuccessCopyWith<$Res> {
   factory _$CharactersLoadSuccessCopyWith(_CharactersLoadSuccess value,
           $Res Function(_CharactersLoadSuccess) then) =
       __$CharactersLoadSuccessCopyWithImpl<$Res>;
-  $Res call({List<CharacterDomain> characters});
+  $Res call({List<CharacterDomain> characters, bool hasFilter});
 }
 
 /// @nodoc
@@ -923,12 +1053,17 @@ class __$CharactersLoadSuccessCopyWithImpl<$Res>
   @override
   $Res call({
     Object? characters = freezed,
+    Object? hasFilter = freezed,
   }) {
     return _then(_CharactersLoadSuccess(
       characters == freezed
           ? _value.characters
           : characters // ignore: cast_nullable_to_non_nullable
               as List<CharacterDomain>,
+      hasFilter == freezed
+          ? _value.hasFilter
+          : hasFilter // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -936,14 +1071,16 @@ class __$CharactersLoadSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CharactersLoadSuccess implements _CharactersLoadSuccess {
-  const _$_CharactersLoadSuccess(this.characters);
+  const _$_CharactersLoadSuccess(this.characters, this.hasFilter);
 
   @override
   final List<CharacterDomain> characters;
+  @override
+  final bool hasFilter;
 
   @override
   String toString() {
-    return 'CharactersState.loadSuccess(characters: $characters)';
+    return 'CharactersState.loadSuccess(characters: $characters, hasFilter: $hasFilter)';
   }
 
   @override
@@ -952,12 +1089,17 @@ class _$_CharactersLoadSuccess implements _CharactersLoadSuccess {
         (other is _CharactersLoadSuccess &&
             (identical(other.characters, characters) ||
                 const DeepCollectionEquality()
-                    .equals(other.characters, characters)));
+                    .equals(other.characters, characters)) &&
+            (identical(other.hasFilter, hasFilter) ||
+                const DeepCollectionEquality()
+                    .equals(other.hasFilter, hasFilter)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(characters);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(characters) ^
+      const DeepCollectionEquality().hash(hasFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -970,11 +1112,12 @@ class _$_CharactersLoadSuccess implements _CharactersLoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<CharacterDomain> characters) loadSuccess,
+    required TResult Function(List<CharacterDomain> characters, bool hasFilter)
+        loadSuccess,
     required TResult Function(CharacterFailure failure) loadFailure,
     required TResult Function(CharacterFailure failure) deleteFailure,
   }) {
-    return loadSuccess(characters);
+    return loadSuccess(characters, hasFilter);
   }
 
   @override
@@ -982,11 +1125,12 @@ class _$_CharactersLoadSuccess implements _CharactersLoadSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<CharacterDomain> characters)? loadSuccess,
+    TResult Function(List<CharacterDomain> characters, bool hasFilter)?
+        loadSuccess,
     TResult Function(CharacterFailure failure)? loadFailure,
     TResult Function(CharacterFailure failure)? deleteFailure,
   }) {
-    return loadSuccess?.call(characters);
+    return loadSuccess?.call(characters, hasFilter);
   }
 
   @override
@@ -994,13 +1138,14 @@ class _$_CharactersLoadSuccess implements _CharactersLoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<CharacterDomain> characters)? loadSuccess,
+    TResult Function(List<CharacterDomain> characters, bool hasFilter)?
+        loadSuccess,
     TResult Function(CharacterFailure failure)? loadFailure,
     TResult Function(CharacterFailure failure)? deleteFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
-      return loadSuccess(characters);
+      return loadSuccess(characters, hasFilter);
     }
     return orElse();
   }
@@ -1047,10 +1192,12 @@ class _$_CharactersLoadSuccess implements _CharactersLoadSuccess {
 }
 
 abstract class _CharactersLoadSuccess implements CharactersState {
-  const factory _CharactersLoadSuccess(List<CharacterDomain> characters) =
+  const factory _CharactersLoadSuccess(
+          List<CharacterDomain> characters, bool hasFilter) =
       _$_CharactersLoadSuccess;
 
   List<CharacterDomain> get characters => throw _privateConstructorUsedError;
+  bool get hasFilter => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$CharactersLoadSuccessCopyWith<_CharactersLoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1133,7 +1280,8 @@ class _$_CharactersLoadFailure implements _CharactersLoadFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<CharacterDomain> characters) loadSuccess,
+    required TResult Function(List<CharacterDomain> characters, bool hasFilter)
+        loadSuccess,
     required TResult Function(CharacterFailure failure) loadFailure,
     required TResult Function(CharacterFailure failure) deleteFailure,
   }) {
@@ -1145,7 +1293,8 @@ class _$_CharactersLoadFailure implements _CharactersLoadFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<CharacterDomain> characters)? loadSuccess,
+    TResult Function(List<CharacterDomain> characters, bool hasFilter)?
+        loadSuccess,
     TResult Function(CharacterFailure failure)? loadFailure,
     TResult Function(CharacterFailure failure)? deleteFailure,
   }) {
@@ -1157,7 +1306,8 @@ class _$_CharactersLoadFailure implements _CharactersLoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<CharacterDomain> characters)? loadSuccess,
+    TResult Function(List<CharacterDomain> characters, bool hasFilter)?
+        loadSuccess,
     TResult Function(CharacterFailure failure)? loadFailure,
     TResult Function(CharacterFailure failure)? deleteFailure,
     required TResult orElse(),
@@ -1297,7 +1447,8 @@ class _$_CharactersDeleteFailure implements _CharactersDeleteFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<CharacterDomain> characters) loadSuccess,
+    required TResult Function(List<CharacterDomain> characters, bool hasFilter)
+        loadSuccess,
     required TResult Function(CharacterFailure failure) loadFailure,
     required TResult Function(CharacterFailure failure) deleteFailure,
   }) {
@@ -1309,7 +1460,8 @@ class _$_CharactersDeleteFailure implements _CharactersDeleteFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<CharacterDomain> characters)? loadSuccess,
+    TResult Function(List<CharacterDomain> characters, bool hasFilter)?
+        loadSuccess,
     TResult Function(CharacterFailure failure)? loadFailure,
     TResult Function(CharacterFailure failure)? deleteFailure,
   }) {
@@ -1321,7 +1473,8 @@ class _$_CharactersDeleteFailure implements _CharactersDeleteFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<CharacterDomain> characters)? loadSuccess,
+    TResult Function(List<CharacterDomain> characters, bool hasFilter)?
+        loadSuccess,
     TResult Function(CharacterFailure failure)? loadFailure,
     TResult Function(CharacterFailure failure)? deleteFailure,
     required TResult orElse(),
