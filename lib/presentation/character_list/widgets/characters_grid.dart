@@ -59,10 +59,10 @@ class CharactersGrid extends StatelessWidget {
                 },
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 0.8022,
+                      childAspectRatio: 0.75,
                       crossAxisCount: 2,
                       crossAxisSpacing: 19,
-                      mainAxisSpacing: 15),
+                      mainAxisSpacing: 25),
                   itemBuilder: (context, index) {
                     final character = characters[index];
                     return CharacterCard(character);
