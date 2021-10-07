@@ -17,10 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CharactersEventTearOff {
   const _$CharactersEventTearOff();
 
-  _WatchAllCharacters watchAllStarted() {
-    return const _WatchAllCharacters();
-  }
-
   _WatchUniverseCharacters watchUniverseStarted(UniverseDomain universe) {
     return _WatchUniverseCharacters(
       universe,
@@ -46,7 +42,6 @@ const $CharactersEvent = _$CharactersEventTearOff();
 mixin _$CharactersEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() watchAllStarted,
     required TResult Function(UniverseDomain universe) watchUniverseStarted,
     required TResult Function(
             Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters)
@@ -56,7 +51,6 @@ mixin _$CharactersEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? watchAllStarted,
     TResult Function(UniverseDomain universe)? watchUniverseStarted,
     TResult Function(
             Either<CharacterFailure, List<CharacterDomain>>
@@ -67,7 +61,6 @@ mixin _$CharactersEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? watchAllStarted,
     TResult Function(UniverseDomain universe)? watchUniverseStarted,
     TResult Function(
             Either<CharacterFailure, List<CharacterDomain>>
@@ -79,7 +72,6 @@ mixin _$CharactersEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_WatchAllCharacters value) watchAllStarted,
     required TResult Function(_WatchUniverseCharacters value)
         watchUniverseStarted,
     required TResult Function(_CharactersReceived value) charactersReceived,
@@ -88,7 +80,6 @@ mixin _$CharactersEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_WatchAllCharacters value)? watchAllStarted,
     TResult Function(_WatchUniverseCharacters value)? watchUniverseStarted,
     TResult Function(_CharactersReceived value)? charactersReceived,
     TResult Function(_DeleteAllCharacters value)? deleteAll,
@@ -96,7 +87,6 @@ mixin _$CharactersEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_WatchAllCharacters value)? watchAllStarted,
     TResult Function(_WatchUniverseCharacters value)? watchUniverseStarted,
     TResult Function(_CharactersReceived value)? charactersReceived,
     TResult Function(_DeleteAllCharacters value)? deleteAll,
@@ -120,131 +110,6 @@ class _$CharactersEventCopyWithImpl<$Res>
   final CharactersEvent _value;
   // ignore: unused_field
   final $Res Function(CharactersEvent) _then;
-}
-
-/// @nodoc
-abstract class _$WatchAllCharactersCopyWith<$Res> {
-  factory _$WatchAllCharactersCopyWith(
-          _WatchAllCharacters value, $Res Function(_WatchAllCharacters) then) =
-      __$WatchAllCharactersCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$WatchAllCharactersCopyWithImpl<$Res>
-    extends _$CharactersEventCopyWithImpl<$Res>
-    implements _$WatchAllCharactersCopyWith<$Res> {
-  __$WatchAllCharactersCopyWithImpl(
-      _WatchAllCharacters _value, $Res Function(_WatchAllCharacters) _then)
-      : super(_value, (v) => _then(v as _WatchAllCharacters));
-
-  @override
-  _WatchAllCharacters get _value => super._value as _WatchAllCharacters;
-}
-
-/// @nodoc
-
-class _$_WatchAllCharacters implements _WatchAllCharacters {
-  const _$_WatchAllCharacters();
-
-  @override
-  String toString() {
-    return 'CharactersEvent.watchAllStarted()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _WatchAllCharacters);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() watchAllStarted,
-    required TResult Function(UniverseDomain universe) watchUniverseStarted,
-    required TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters)
-        charactersReceived,
-    required TResult Function() deleteAll,
-  }) {
-    return watchAllStarted();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? watchAllStarted,
-    TResult Function(UniverseDomain universe)? watchUniverseStarted,
-    TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>>
-                failureOrCharacters)?
-        charactersReceived,
-    TResult Function()? deleteAll,
-  }) {
-    return watchAllStarted?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? watchAllStarted,
-    TResult Function(UniverseDomain universe)? watchUniverseStarted,
-    TResult Function(
-            Either<CharacterFailure, List<CharacterDomain>>
-                failureOrCharacters)?
-        charactersReceived,
-    TResult Function()? deleteAll,
-    required TResult orElse(),
-  }) {
-    if (watchAllStarted != null) {
-      return watchAllStarted();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_WatchAllCharacters value) watchAllStarted,
-    required TResult Function(_WatchUniverseCharacters value)
-        watchUniverseStarted,
-    required TResult Function(_CharactersReceived value) charactersReceived,
-    required TResult Function(_DeleteAllCharacters value) deleteAll,
-  }) {
-    return watchAllStarted(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_WatchAllCharacters value)? watchAllStarted,
-    TResult Function(_WatchUniverseCharacters value)? watchUniverseStarted,
-    TResult Function(_CharactersReceived value)? charactersReceived,
-    TResult Function(_DeleteAllCharacters value)? deleteAll,
-  }) {
-    return watchAllStarted?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_WatchAllCharacters value)? watchAllStarted,
-    TResult Function(_WatchUniverseCharacters value)? watchUniverseStarted,
-    TResult Function(_CharactersReceived value)? charactersReceived,
-    TResult Function(_DeleteAllCharacters value)? deleteAll,
-    required TResult orElse(),
-  }) {
-    if (watchAllStarted != null) {
-      return watchAllStarted(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _WatchAllCharacters implements CharactersEvent {
-  const factory _WatchAllCharacters() = _$_WatchAllCharacters;
 }
 
 /// @nodoc
@@ -324,7 +189,6 @@ class _$_WatchUniverseCharacters implements _WatchUniverseCharacters {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() watchAllStarted,
     required TResult Function(UniverseDomain universe) watchUniverseStarted,
     required TResult Function(
             Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters)
@@ -337,7 +201,6 @@ class _$_WatchUniverseCharacters implements _WatchUniverseCharacters {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? watchAllStarted,
     TResult Function(UniverseDomain universe)? watchUniverseStarted,
     TResult Function(
             Either<CharacterFailure, List<CharacterDomain>>
@@ -351,7 +214,6 @@ class _$_WatchUniverseCharacters implements _WatchUniverseCharacters {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? watchAllStarted,
     TResult Function(UniverseDomain universe)? watchUniverseStarted,
     TResult Function(
             Either<CharacterFailure, List<CharacterDomain>>
@@ -369,7 +231,6 @@ class _$_WatchUniverseCharacters implements _WatchUniverseCharacters {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_WatchAllCharacters value) watchAllStarted,
     required TResult Function(_WatchUniverseCharacters value)
         watchUniverseStarted,
     required TResult Function(_CharactersReceived value) charactersReceived,
@@ -381,7 +242,6 @@ class _$_WatchUniverseCharacters implements _WatchUniverseCharacters {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_WatchAllCharacters value)? watchAllStarted,
     TResult Function(_WatchUniverseCharacters value)? watchUniverseStarted,
     TResult Function(_CharactersReceived value)? charactersReceived,
     TResult Function(_DeleteAllCharacters value)? deleteAll,
@@ -392,7 +252,6 @@ class _$_WatchUniverseCharacters implements _WatchUniverseCharacters {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_WatchAllCharacters value)? watchAllStarted,
     TResult Function(_WatchUniverseCharacters value)? watchUniverseStarted,
     TResult Function(_CharactersReceived value)? charactersReceived,
     TResult Function(_DeleteAllCharacters value)? deleteAll,
@@ -483,7 +342,6 @@ class _$_CharactersReceived implements _CharactersReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() watchAllStarted,
     required TResult Function(UniverseDomain universe) watchUniverseStarted,
     required TResult Function(
             Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters)
@@ -496,7 +354,6 @@ class _$_CharactersReceived implements _CharactersReceived {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? watchAllStarted,
     TResult Function(UniverseDomain universe)? watchUniverseStarted,
     TResult Function(
             Either<CharacterFailure, List<CharacterDomain>>
@@ -510,7 +367,6 @@ class _$_CharactersReceived implements _CharactersReceived {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? watchAllStarted,
     TResult Function(UniverseDomain universe)? watchUniverseStarted,
     TResult Function(
             Either<CharacterFailure, List<CharacterDomain>>
@@ -528,7 +384,6 @@ class _$_CharactersReceived implements _CharactersReceived {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_WatchAllCharacters value) watchAllStarted,
     required TResult Function(_WatchUniverseCharacters value)
         watchUniverseStarted,
     required TResult Function(_CharactersReceived value) charactersReceived,
@@ -540,7 +395,6 @@ class _$_CharactersReceived implements _CharactersReceived {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_WatchAllCharacters value)? watchAllStarted,
     TResult Function(_WatchUniverseCharacters value)? watchUniverseStarted,
     TResult Function(_CharactersReceived value)? charactersReceived,
     TResult Function(_DeleteAllCharacters value)? deleteAll,
@@ -551,7 +405,6 @@ class _$_CharactersReceived implements _CharactersReceived {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_WatchAllCharacters value)? watchAllStarted,
     TResult Function(_WatchUniverseCharacters value)? watchUniverseStarted,
     TResult Function(_CharactersReceived value)? charactersReceived,
     TResult Function(_DeleteAllCharacters value)? deleteAll,
@@ -616,7 +469,6 @@ class _$_DeleteAllCharacters implements _DeleteAllCharacters {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() watchAllStarted,
     required TResult Function(UniverseDomain universe) watchUniverseStarted,
     required TResult Function(
             Either<CharacterFailure, List<CharacterDomain>> failureOrCharacters)
@@ -629,7 +481,6 @@ class _$_DeleteAllCharacters implements _DeleteAllCharacters {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? watchAllStarted,
     TResult Function(UniverseDomain universe)? watchUniverseStarted,
     TResult Function(
             Either<CharacterFailure, List<CharacterDomain>>
@@ -643,7 +494,6 @@ class _$_DeleteAllCharacters implements _DeleteAllCharacters {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? watchAllStarted,
     TResult Function(UniverseDomain universe)? watchUniverseStarted,
     TResult Function(
             Either<CharacterFailure, List<CharacterDomain>>
@@ -661,7 +511,6 @@ class _$_DeleteAllCharacters implements _DeleteAllCharacters {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_WatchAllCharacters value) watchAllStarted,
     required TResult Function(_WatchUniverseCharacters value)
         watchUniverseStarted,
     required TResult Function(_CharactersReceived value) charactersReceived,
@@ -673,7 +522,6 @@ class _$_DeleteAllCharacters implements _DeleteAllCharacters {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_WatchAllCharacters value)? watchAllStarted,
     TResult Function(_WatchUniverseCharacters value)? watchUniverseStarted,
     TResult Function(_CharactersReceived value)? charactersReceived,
     TResult Function(_DeleteAllCharacters value)? deleteAll,
@@ -684,7 +532,6 @@ class _$_DeleteAllCharacters implements _DeleteAllCharacters {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_WatchAllCharacters value)? watchAllStarted,
     TResult Function(_WatchUniverseCharacters value)? watchUniverseStarted,
     TResult Function(_CharactersReceived value)? charactersReceived,
     TResult Function(_DeleteAllCharacters value)? deleteAll,

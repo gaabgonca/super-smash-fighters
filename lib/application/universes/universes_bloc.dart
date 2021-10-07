@@ -16,25 +16,21 @@ class UniversesBloc extends Bloc<UniversesEvent, UniversesState> {
   final IUniverseRepository _universeRepository;
   UniversesBloc(this._universeRepository) : super(_Initial()) {
     on<UniversesEvent>((event, emit) {
-      event.map(
-        watchAllStarted: (event) async {
-          emit(UniversesState.loadInProgress());
-          var failureOrUniverses = await _universeRepository.watchAll();
-          add(UniversesEvent.universesReceived(failureOrUniverses));
-        },
-        universesReceived: (event) async {
-          event.failureOrUniverses.fold(
-              (failure) => {emit(UniversesState.loadFailure(failure))},
-              (universes) => {emit(UniversesState.loadSuccess(universes))});
-        },
-        deleteAll: (event) async {
-          var failureOrUnit = await _universeRepository.deleteAll();
-          failureOrUnit.fold(
-            (failure) => emit(UniversesState.deleteFailure(failure)),
-            (_) => {add(UniversesEvent.watchAllStarted())},
-          );
-        },
-      );
+      event.map(watchAllStarted: (event) async {
+        emit(UniversesState.loadInProgress());
+        var failureOrUniverses = await _universeRepository.watchAll();
+        add(UniversesEvent.universesReceived(failureOrUniverses));
+      }, universesReceived: (event) async {
+        event.failureOrUniverses.fold(
+            (failure) => {emit(UniversesState.loadFailure(failure))},
+            (universes) => {emit(UniversesState.loadSuccess(universes))});
+      }, deleteAll: (event) async {
+        var failureOrUnit = await _universeRepository.deleteAll();
+        failureOrUnit.fold(
+          (failure) => emit(UniversesState.deleteFailure(failure)),
+          (_) => {add(UniversesEvent.watchAllStarted())},
+        );
+      });
     });
   }
 }

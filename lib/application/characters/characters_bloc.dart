@@ -20,15 +20,15 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
   CharactersBloc(this._characterRepository) : super(_Initial()) {
     on<CharactersEvent>((event, emit) {
       event.map(
-        watchAllStarted: (event) async {
-          emit(CharactersState.loadInProgress());
-          var failureOrCharacters = await _characterRepository.watchAll();
-          add(CharactersEvent.charactersReceived(failureOrCharacters));
-        },
         watchUniverseStarted: (event) async {
           emit(CharactersState.loadInProgress());
-          var failureOrCharacters =
-              await _characterRepository.watchFromUniverse(event.universe);
+          var failureOrCharacters;
+
+          if (event.universe == UniverseDomain.empty())
+            failureOrCharacters = await _characterRepository.watchAll();
+          else
+            failureOrCharacters =
+                await _characterRepository.watchFromUniverse(event.universe);
           add(CharactersEvent.charactersReceived(failureOrCharacters));
         },
         charactersReceived: (event) async {
@@ -40,7 +40,9 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
           var failureOrUnit = await _characterRepository.deleteAll();
           failureOrUnit.fold(
             (failure) => emit(CharactersState.deleteFailure(failure)),
-            (_) => {add(CharactersEvent.watchAllStarted())},
+            (_) => {
+              add(CharactersEvent.watchUniverseStarted(UniverseDomain.empty()))
+            },
           );
         },
       );

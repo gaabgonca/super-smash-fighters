@@ -5,7 +5,6 @@ import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import 'package:super_smash_fighters/domain/core/universe.dart';
-import 'package:kt_dart/src/collection/kt_list.dart';
 import 'package:super_smash_fighters/domain/universe_list/i_universe_repository.dart';
 import 'package:super_smash_fighters/domain/universe_list/universe_failure.dart';
 import 'package:super_smash_fighters/infrastructure/universes/universe_dto.dart';
@@ -36,7 +35,8 @@ class UniverseRepository implements IUniverseRepository {
     cachedUniverses = await universesCollection.where().findAll();
     var universesDomain = cachedUniverses
         .map((universeDto) => universeDto.toDomain() as UniverseDomain)
-        .toList();
+        .toList()
+          ..sort((a, b) => a.name.compareTo(b.name));
     universesDomain.insert(0, UniverseDomain.empty());
     return right(universesDomain);
   }
@@ -74,7 +74,8 @@ class UniverseRepository implements IUniverseRepository {
     }
     var universesDomain = cachedUniverses
         .map((universeDto) => universeDto.toDomain() as UniverseDomain)
-        .toList();
+        .toList()
+          ..sort((a, b) => a.name.compareTo(b.name));
     universesDomain.insert(0, UniverseDomain.empty());
     return right(universesDomain);
   }

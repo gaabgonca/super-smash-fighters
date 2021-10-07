@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_smash_fighters/application/universe_filter/bloc/universefilter_bloc.dart';
 import 'package:super_smash_fighters/domain/core/universe.dart';
 import 'package:super_smash_fighters/infrastructure/universes/universe_dto.dart';
 import 'package:super_smash_fighters/presentation/core/colors.dart';
@@ -11,27 +13,33 @@ class UniversesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 10),
-      child: SizedBox(
-        height: 48,
-        child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: universes.length,
-            itemBuilder: (contetx, index) {
-              final universe = universes[index];
-              return Container(
-                  width: context.widthPx * 0.3333,
-                  margin: EdgeInsets.symmetric(horizontal: 5),
-                  child: UniverseButton(
-                    universe: universe,
-                    selected: selectedIndex == index,
-                    onPressed: () {
-                      print(index);
-                    },
-                  ));
-            }),
-      ),
+    return BlocBuilder<UniversefilterBloc, UniversefilterState>(
+      builder: (context, state) {
+        UniverseDomain selectedUniverse = state.universe;
+        return Container(
+          margin: EdgeInsets.only(top: 10),
+          child: SizedBox(
+            height: 48,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: universes.length,
+                itemBuilder: (ctx, index) {
+                  final universe = universes[index];
+                  return Container(
+                      width: context.widthPx * 0.3333,
+                      margin: EdgeInsets.symmetric(horizontal: 5),
+                      child: UniverseButton(
+                        universe: universe,
+                        selected: universe == selectedUniverse,
+                        onPressed: () {
+                          ctx.read<UniversefilterBloc>().add(
+                              UniversefilterEvent.selectedUniverse(universe));
+                        },
+                      ));
+                }),
+          ),
+        );
+      },
     );
   }
 }

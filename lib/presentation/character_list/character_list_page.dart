@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_smash_fighters/application/characters/characters_bloc.dart';
+import 'package:super_smash_fighters/application/universe_filter/bloc/universefilter_bloc.dart';
 import 'package:super_smash_fighters/application/universes/universes_bloc.dart';
 import 'package:super_smash_fighters/domain/character_list/character_failure.dart';
 import 'package:super_smash_fighters/domain/character_list/i_character_repository.dart';
@@ -46,7 +47,13 @@ class CharacterListPage extends StatelessWidget {
           }),
           BlocProvider<CharactersBloc>(create: (context) {
             final bloc = getIt<CharactersBloc>();
-            bloc.add(const CharactersEvent.deleteAll());
+            bloc.add(
+                CharactersEvent.watchUniverseStarted(UniverseDomain.empty()));
+            return bloc;
+          }),
+          BlocProvider<UniversefilterBloc>(create: (context) {
+            final bloc = getIt<UniversefilterBloc>();
+
             return bloc;
           }),
         ],
@@ -68,20 +75,27 @@ class CharacterListPage extends StatelessWidget {
                       const Center(child: Text('Universes delete failure')),
                 );
               }),
-              BlocBuilder<CharactersBloc, CharactersState>(
-                builder: (context, state) {
-                  return state.map(
-                    initial: (_) => Container(),
-                    loadInProgress: (_) => Expanded(
-                        child:
-                            const Center(child: CircularProgressIndicator())),
-                    loadSuccess: (state) => CharactersGrid(state.characters),
-                    loadFailure: (failure) =>
-                        const Center(child: Text('Characters load failure')),
-                    deleteFailure: (failure) =>
-                        const Center(child: Text('Characters delete failure')),
-                  );
+              BlocListener<UniversefilterBloc, UniversefilterState>(
+                listener: (context, state) {
+                  // print(state.universe == UniverseDomain.empty());
+                  context.read<CharactersBloc>().add(
+                      CharactersEvent.watchUniverseStarted(state.universe));
                 },
+                child: BlocBuilder<CharactersBloc, CharactersState>(
+                  builder: (context, state) {
+                    return state.map(
+                      initial: (_) => Container(),
+                      loadInProgress: (_) => Expanded(
+                          child:
+                              const Center(child: CircularProgressIndicator())),
+                      loadSuccess: (state) => CharactersGrid(state.characters),
+                      loadFailure: (failure) =>
+                          const Center(child: Text('Characters load failure')),
+                      deleteFailure: (failure) => const Center(
+                          child: Text('Characters delete failure')),
+                    );
+                  },
+                ),
               )
             ],
           ),

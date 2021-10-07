@@ -39,7 +39,7 @@ class CharacterRepository implements ICharacterRepository {
     var cachedCharacters = await characterCollection.where().findAll();
     if (cachedCharacters.isEmpty) {
       try {
-        final characters = await _getCharacters();
+        final characters = await getCharacters();
         await isar.writeTxn((_) async {
           await characterCollection.putAll(characters);
         });
@@ -54,7 +54,7 @@ class CharacterRepository implements ICharacterRepository {
     return right(charactersDomain);
   }
 
-  Future<List<Character>> _getCharacters({UniverseDomain? universe}) async {
+  Future<List<Character>> getCharacters({UniverseDomain? universe}) async {
     String newUrl = url;
     if (universe != null) {
       newUrl = url + '?universe=${universe.name}';
@@ -94,7 +94,7 @@ class CharacterRepository implements ICharacterRepository {
         .findAll();
     if (cachedCharacters.isEmpty) {
       try {
-        final characters = await _getCharacters(universe: universe);
+        final characters = await getCharacters(universe: universe);
         await isar.writeTxn((_) async {
           await characterCollection.putAll(characters);
         });
